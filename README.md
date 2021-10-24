@@ -1,2 +1,3 @@
 # RockPaperScissor_Discord
- Discord bot made in c# that transform the classic old game in an epic TCG!
+ *Discord Bot* made in C# that transform the classic old game in an **Epic TCG!**
+
