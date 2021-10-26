@@ -99,6 +99,7 @@ namespace RockPaperScissor
             commands.RegisterCommands<Commands.CardClaimCommand>();
             commands.RegisterCommands<Commands.GameMarketCommands>();
             commands.RegisterCommands<Commands.DuelDeckCommands>();
+            commands.RegisterCommands<Commands.BattleCommands>();
         }
 
 
