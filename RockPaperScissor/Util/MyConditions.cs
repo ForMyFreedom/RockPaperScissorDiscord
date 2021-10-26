@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using RockPaperScissor.Data;
-//using RockPaperScissor.Duel;
+using RockPaperScissor.Duel;
 
 namespace RockPaperScissor.Util
 {
@@ -47,11 +47,9 @@ namespace RockPaperScissor.Util
             return member1 != member2;
         }
 
-        /*
         public static bool IsAdequatedDuelDeckToTheGameStyle(DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
         {
             return duelStatus.GetQuantOfCards() == AllGameData.GetMemberDeck(member).GetDuelDeck(duelDeckIndex).ToArray().Length;
         }
-        */
     }
 }

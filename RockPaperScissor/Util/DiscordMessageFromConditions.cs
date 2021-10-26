@@ -6,7 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using RockPaperScissor.Data;
-//using RockPaperScissor.Duel;
+using RockPaperScissor.Duel;
 
 namespace RockPaperScissor.Util
 {
@@ -76,7 +76,7 @@ namespace RockPaperScissor.Util
                 return false;
             }
         }
-        /*
+
         public static async Task<bool> IsAdequatedDuelDeckToTheGameStyle(DiscordChannel channel, DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
         {
             if (MyConditions.IsAdequatedDuelDeckToTheGameStyle(member, duelDeckIndex, duelStatus)) return true;
@@ -86,6 +86,5 @@ namespace RockPaperScissor.Util
                 return false;
             }
         }
-        */
     }
 }
