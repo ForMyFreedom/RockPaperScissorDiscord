@@ -11,7 +11,7 @@ namespace RockPaperScissor.Data
     class AllGameData
     {
         public const String NAME_OF_ROLE = "Guerreiro das Cartas";
-        public const int TIME_TO_CLAIM_IN_SECONDS = 3000;
+        public const int TIME_TO_CLAIM_IN_SECONDS = 1800;
         public const int DUEL_DECKS_LENGTH = 2;
         public const int MAX_CARDS_IN_DUEL_DECK = 10;
         public static ulong gameRoleID;
