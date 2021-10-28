@@ -20,4 +20,4 @@
 bin/
 obj/
 .vs/
-.token
+*.secret
