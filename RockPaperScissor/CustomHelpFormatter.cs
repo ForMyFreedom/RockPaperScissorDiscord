@@ -12,7 +12,7 @@ using System.Text;
 
 namespace RockPaperScissor
 {
-    public class CustomHelpFormatter : DefaultHelpFormatter
+    public class CustomHelpFormatter : DSharpPlus.CommandsNext.Converters.DefaultHelpFormatter
     {
         public CustomHelpFormatter(CommandContext ctx) : base(ctx) {}
 
