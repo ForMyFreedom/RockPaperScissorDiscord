@@ -58,7 +58,7 @@ namespace RockPaperScissor
         {
             return new DiscordConfiguration
             {
-                Token = System.IO.File.ReadAllLines("token.secret")[0],
+                Token = "insert your token here XD@",
                 TokenType = TokenType.Bot,
                 Intents = DiscordIntents.AllUnprivileged,
                 ReconnectIndefinitely = true,
