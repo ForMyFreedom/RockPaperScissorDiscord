@@ -13,6 +13,14 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 ---
 ---
 
+## To Contributors
+It's necessary to have a Discord Token in their Develop Portal. After get it, you need to run the 'token_file_creator.py' archive in the directory that have all the codes.
+After that, i belive you will run this application without problems
+
+
+---
+---
+
 ## Apresentation
 This game is played with a set of _Cards_ called _Deck_. The cards are created in a random way, with different levels of power and distinct specialities.
 However, there are three _Elements_ that compounds every cards:
