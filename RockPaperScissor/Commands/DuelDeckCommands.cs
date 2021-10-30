@@ -38,9 +38,6 @@ namespace RockPaperScissor.Commands
 
 
 
-
-
-
         private async Task<bool> CreateDuelDataIsOk(CommandContext ctx, int deckIndex, int[] cardsListIndex)
         {
             if (! await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, ctx.User.Id))  return false;

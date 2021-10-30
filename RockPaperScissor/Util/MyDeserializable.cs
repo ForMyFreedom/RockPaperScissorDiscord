@@ -110,7 +110,7 @@ namespace RockPaperScissor.Util
             }
             catch (Exception)
             {
-                return new[] {new List<int>(), new List<int>()}.ToList();
+                return new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH);
             }
         }
 

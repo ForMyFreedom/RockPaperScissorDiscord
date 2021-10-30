@@ -23,7 +23,7 @@ namespace RockPaperScissor.Data
             CardCreator.GetStandartCardsToDeck(this);
             ownerID = memberID;
             coinsQuant = 50;
-            duelDecksList = new List<List<int>>(2);
+            duelDecksList = new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH);
         }
 
 
