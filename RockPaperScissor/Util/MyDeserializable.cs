@@ -1,9 +1,7 @@
-﻿using System;
+﻿using RockPaperScissor.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using RockPaperScissor.Data;
 
 namespace RockPaperScissor.Util
 {
@@ -18,7 +16,7 @@ namespace RockPaperScissor.Util
             operationsResult[1] = GetDecksGameData(allDataText);
 
             if (MyUtilities.WasSucefullOperation(operationsResult)) return true;
-                                                                    return false;
+            return false;
         }
 
 
@@ -110,7 +108,7 @@ namespace RockPaperScissor.Util
             }
             catch (Exception)
             {
-                return new[] {new List<int>(), new List<int>()}.ToList();
+                return new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH);
             }
         }
 
@@ -137,7 +135,7 @@ namespace RockPaperScissor.Util
         {
             List<List<int>> doubleArrayInt = new List<List<int>>();
 
-            for(int i = 0; i < doubleStrArray.Count; i++)
+            for (int i = 0; i < doubleStrArray.Count; i++)
             {
                 doubleArrayInt.Add(new List<int>());
 

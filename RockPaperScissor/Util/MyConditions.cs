@@ -1,10 +1,4 @@
-﻿using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.Entities;
-
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using DSharpPlus.Entities;
 using RockPaperScissor.Data;
 using RockPaperScissor.Duel;
 

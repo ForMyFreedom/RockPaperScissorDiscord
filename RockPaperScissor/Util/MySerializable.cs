@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RockPaperScissor.Data;
+using System;
+using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using System.IO;
-using RockPaperScissor.Data;
 
 namespace RockPaperScissor.Util
 {
@@ -87,7 +85,7 @@ namespace RockPaperScissor.Util
             }
             catch (Exception e)
             {
-                fileStream.Write(GetEncoding().GetBytes(e.Message));
+                fileStream.Write(GetEncoding().GetBytes(e.ToString()));
                 fileStream.Close();
                 return false;
             }
@@ -112,7 +110,7 @@ namespace RockPaperScissor.Util
         {
             return Encoding.UTF8;
         }
-        
+
 
 
         static private String GetStringOfArrayOfDuelDecks(Deck deck)
@@ -120,13 +118,26 @@ namespace RockPaperScissor.Util
             String str = "{";
             int[][] allDuelDecks = deck.GetAllDuelDecks().ToArray().Select(x => x.ToArray()).ToArray();
 
-            for (int i = 0; i<allDuelDecks.Length; i++)
+            for (int i = 0; i < AllGameData.DUEL_DECKS_LENGTH; i++)
             {
-                str += "(" + string.Join(",", allDuelDecks[i]) + ")";
-                if (i + 1 < allDuelDecks.Length) str += ". ";
+                str += "(" + GetDuelDeckContent(allDuelDecks, i) + ")";
+                if (i + 1 < AllGameData.DUEL_DECKS_LENGTH) str += ". ";
             }
 
-            return str+"}";
+            return str + "}";
+        }
+
+
+        static private String GetDuelDeckContent(int[][] allDuelDecks, int index)
+        {
+            try
+            {
+                return string.Join(",", allDuelDecks[index]);
+            }
+            catch (Exception)
+            {
+                return "";
+            }
         }
 
     }

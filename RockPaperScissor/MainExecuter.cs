@@ -1,27 +1,20 @@
 ﻿using DSharpPlus;
 using DSharpPlus.CommandsNext;
-using DSharpPlus.Entities;
-using DSharpPlus.EventArgs;
 using DSharpPlus.Interactivity;
 using DSharpPlus.Interactivity.Enums;
 using DSharpPlus.Interactivity.Extensions;
-using System;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Xml.Serialization;
-using System.Text;
-using System.IO;
-
-using RockPaperScissor.Util;
 using RockPaperScissor.Data;
+using RockPaperScissor.Util;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace RockPaperScissor
 {
     class MainExecuter
     {
-        static private String[] DiscordPrefixes = new[] {"!rps "};
+        static private String[] DiscordPrefixes = new[] { "!rps " };
         static private DiscordClient discord;
         static private CommandsNextExtension commands;
 
@@ -58,7 +51,7 @@ namespace RockPaperScissor
         {
             return new DiscordConfiguration
             {
-                Token = "ODM3MDIyMjc2MDc5NTgzMzEy.YImfvQ.PHp9QGuKIQB5FgrvuiEzN_3HwHs",
+                Token = System.IO.File.ReadAllLines("../../../token.secret")[0],
                 TokenType = TokenType.Bot,
                 Intents = DiscordIntents.AllUnprivileged,
                 ReconnectIndefinitely = true,
@@ -77,7 +70,7 @@ namespace RockPaperScissor
             });
         }
 
-        
+
         private static void StartTheBaseOfDiscordCommands()
         {
             commands = discord.UseCommandsNext(new CommandsNextConfiguration()
@@ -120,7 +113,8 @@ namespace RockPaperScissor
 
                 RegisterDefaultCommands();
 
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine(e.StackTrace);
                 AllGameData.StartNewData();

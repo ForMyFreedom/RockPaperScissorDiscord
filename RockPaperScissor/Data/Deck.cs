@@ -1,9 +1,6 @@
-﻿using DSharpPlus.Entities;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RockPaperScissor.Data
 {
@@ -23,7 +20,7 @@ namespace RockPaperScissor.Data
             CardCreator.GetStandartCardsToDeck(this);
             ownerID = memberID;
             coinsQuant = 50;
-            duelDecksList = new List<List<int>>(2);
+            duelDecksList = new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH);
         }
 
 
@@ -50,7 +47,7 @@ namespace RockPaperScissor.Data
 
         public bool RemoveCard(int ID)
         {
-            foreach(Card card in allCards)
+            foreach (Card card in allCards)
             {
                 if (card.GetID() == ID)
                 {
@@ -65,7 +62,7 @@ namespace RockPaperScissor.Data
         public override string ToString()
         {
             String cardsToString = $"{GetCoins()}  ℳ \n";
-            foreach (Card _card in allCards)  cardsToString += _card.ToString() + "\n";
+            foreach (Card _card in allCards) cardsToString += _card.ToString() + "\n";
             return cardsToString;
         }
 

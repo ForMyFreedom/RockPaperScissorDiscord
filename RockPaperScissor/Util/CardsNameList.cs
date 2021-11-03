@@ -4,23 +4,23 @@ namespace RockPaperScissor.Util
 {
     static class CardsNameList
     {
-        static String[] impactList = new[] {"Dragão", "Baleia", "Bufalo", "Leão", "Martelo", "Bigorna", "Altere", "Canhão" };
-        static String[] precisionList = new[] {"Pássaro", "Insetos", "Tigre", "Golfinho", "Adaga", "Flecha", "Pistola", "Agulha"};
-        static String[] enchantList = new[] {"Coruja", "Gato", "Borboleta", "Fada", "Varinha", "Grimório", "Mascara", "Anel"};
-        static String[] middleList = new[] {"Macaco", "Lobo", "Cavalo", "Gavião", "Espada", "Machado", "Bola", "Lança"};
-        
-        static String[] weakAdject = new[] {"Sutíl", "Banal", "Fracote", "Inútil"};
-        static String[] middleAdject = new[] {"Refinado(a)", "Aprimado(a)", "Poderoso(a)", "Treinado(a)"};
-        static String[] strongAdject = new[] { "Divino(a)", "Demoniaco(a)", "Mestre", "Superior"};
+        static String[] impactList = new[] { "Dragão", "Baleia", "Bufalo", "Leão", "Martelo", "Bigorna", "Altere", "Canhão" };
+        static String[] precisionList = new[] { "Pássaro", "Insetos", "Tigre", "Golfinho", "Adaga", "Flecha", "Pistola", "Agulha" };
+        static String[] enchantList = new[] { "Coruja", "Gato", "Borboleta", "Fada", "Varinha", "Grimório", "Mascara", "Anel" };
+        static String[] middleList = new[] { "Macaco", "Lobo", "Cavalo", "Gavião", "Espada", "Machado", "Bola", "Lança" };
+
+        static String[] weakAdject = new[] { "Sutíl", "Banal", "Fracote", "Inútil" };
+        static String[] middleAdject = new[] { "Refinado(a)", "Aprimado(a)", "Poderoso(a)", "Treinado(a)" };
+        static String[] strongAdject = new[] { "Divino(a)", "Demoniaco(a)", "Mestre", "Superior" };
 
 
         static Random rng = new Random();
 
 
-        public static String GetImpactName() {return impactList[rng.Next(0, impactList.Length + 1)];}
-        public static String GetPrecisionName() {return precisionList[rng.Next(0, precisionList.Length + 1)];}
-        public static String GetEnchantName() {return enchantList[rng.Next(0, enchantList.Length + 1)];}
-        public static String GetMiddleName() {return middleList[rng.Next(0, middleList.Length + 1)];}
+        public static String GetImpactName() { return impactList[rng.Next(0, impactList.Length + 1)]; }
+        public static String GetPrecisionName() { return precisionList[rng.Next(0, precisionList.Length + 1)]; }
+        public static String GetEnchantName() { return enchantList[rng.Next(0, enchantList.Length + 1)]; }
+        public static String GetMiddleName() { return middleList[rng.Next(0, middleList.Length + 1)]; }
 
         public static String GetWeakAdject() { return weakAdject[rng.Next(0, weakAdject.Length + 1)]; }
         public static String GetMiddleAdject() { return middleAdject[rng.Next(0, middleAdject.Length + 1)]; }
@@ -51,7 +51,8 @@ namespace RockPaperScissor.Util
             if (quantElements < 5)
             {
                 return GetWeakAdject();
-            } else if (quantElements < 10)
+            }
+            else if (quantElements < 10)
             {
                 return GetMiddleAdject();
             }
