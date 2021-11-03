@@ -1,5 +1,6 @@
 ﻿using DSharpPlus.Entities;
 using System.Threading.Tasks;
+using RockPaperScissor.Data;
 //using RockPaperScissor.Duel;
 
 namespace RockPaperScissor.Util
@@ -11,7 +12,7 @@ namespace RockPaperScissor.Util
             if (MyConditions.PlayerIsCardMaster(member)) return true;
             else
             {
-                await channel.SendMessageAsync("O membro mencionado não possui um deck");
+                await channel.SendMessageAsync(AllGameData.messageGerenciator.MemberDontHaveDeck());
                 return false;
             }
         }
@@ -22,7 +23,7 @@ namespace RockPaperScissor.Util
             if (MyConditions.PlayerIsCardMaster(id)) return true;
             else
             {
-                await channel.SendMessageAsync("O membro mencionado não possui um deck");
+                await channel.SendMessageAsync(AllGameData.messageGerenciator.MemberDontHaveDeck());
                 return false;
             }
         }
@@ -33,7 +34,7 @@ namespace RockPaperScissor.Util
             if (MyConditions.PlayerHasTheCardId(member, cardID)) return true;
             else
             {
-                await channel.SendMessageAsync("O mestre não possui o id de carta especificada");
+                await channel.SendMessageAsync(AllGameData.messageGerenciator.CardIdDontExist());
                 return false;
             }
         }
@@ -44,7 +45,7 @@ namespace RockPaperScissor.Util
             if (MyConditions.PlayerHasTheCoins(member, coinsQuant)) return true;
             else
             {
-                await channel.SendMessageAsync("O mestre das cartas não possui essa quantidade de moedas");
+                await channel.SendMessageAsync(AllGameData.messageGerenciator.NotEnoughCoins());
                 return false;
             }
         }
@@ -55,7 +56,7 @@ namespace RockPaperScissor.Util
             if (MyConditions.ChannelIsPrivate(channel)) return true;
             else
             {
-                await channel.SendMessageAsync("Essa ação apenas pode ser chamada em meu privado...");
+                await channel.SendMessageAsync(AllGameData.messageGerenciator.OnlyPrivateCall());
                 return false;
             }
         }
@@ -66,7 +67,7 @@ namespace RockPaperScissor.Util
             if (MyConditions.IsNotTheSameMember(member1, member2)) return true;
             else
             {
-                await channel.SendMessageAsync("Você não pode realizar esta ação consigo mesmo");
+                await channel.SendMessageAsync(AllGameData.messageGerenciator.NotCallYourself());
                 return false;
             }
         }
