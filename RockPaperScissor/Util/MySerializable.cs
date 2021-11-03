@@ -32,7 +32,8 @@ namespace RockPaperScissor.Util
                 Object[] globalGameData = new Object[]
                 {
                     //Add new Global vars here:
-                    AllGameData.gameRoleID
+                    AllGameData.gameRoleID,
+                    AllGameData.GetMessageGerenciatorAbreviation()
                 };
                 String stringArray = SetArrayInStringArray(globalGameData) + "\n";
 

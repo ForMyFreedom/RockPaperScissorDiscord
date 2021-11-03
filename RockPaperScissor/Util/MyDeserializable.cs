@@ -29,6 +29,7 @@ namespace RockPaperScissor.Util
 
                 //Add New Global Vars Here:
                 AllGameData.gameRoleID = ulong.Parse(allGlobalGameDataArray[0]);
+                AllGameData.SetMessageGerenciator(allGlobalGameDataArray[1]);
 
                 return true;
             }
