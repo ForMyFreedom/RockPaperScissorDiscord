@@ -1,7 +1,7 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
-using RockPaperScissor.Data;
 using System;
+using RockPaperScissor.Data;
 
 namespace RockPaperScissor.Market
 {

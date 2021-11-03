@@ -1,9 +1,13 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using DSharpPlus.Interactivity.Extensions;
-using RockPaperScissor.Data;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using DSharpPlus.Interactivity.Extensions;
+using RockPaperScissor.Util;
+using RockPaperScissor.Data;
 
 
 namespace RockPaperScissor.Commands
@@ -36,7 +40,7 @@ namespace RockPaperScissor.Commands
 
         [Command("del_deck"), Aliases("dd")]
         [RequireGuild]
-        [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
+        [RequireRoles(RoleCheckMode.All, new[] {AllGameData.NAME_OF_ROLE})]
         [Description("Deleta seu Deck")]
         public async Task ResetDeck(CommandContext ctx)
         {
@@ -46,13 +50,13 @@ namespace RockPaperScissor.Commands
 
         [Command("del_card"), Aliases("dc")]
         [RequireGuild]
-        [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
+        [RequireRoles(RoleCheckMode.All, new[] {AllGameData.NAME_OF_ROLE})]
         [Description("Deleta uma Carta de seu Deck")]
         public async Task RemoveCard(CommandContext ctx, int ID)
         {
             bool sucessefulRemove = AllGameData.GetMemberDeck(ctx.Member).RemoveCard(ID);
             if (sucessefulRemove) await ctx.Channel.SendMessageAsync("Carta Removida");
-            else await ctx.Channel.SendMessageAsync("ID invalido, tente novamente");
+            else                  await ctx.Channel.SendMessageAsync("ID invalido, tente novamente");
         }
 
 

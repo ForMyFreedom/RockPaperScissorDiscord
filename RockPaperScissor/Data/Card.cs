@@ -1,5 +1,10 @@
-﻿using RockPaperScissor.Util;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+using RockPaperScissor.Util;
 
 namespace RockPaperScissor.Data
 {
@@ -68,13 +73,13 @@ namespace RockPaperScissor.Data
 
         public int[] GetElements()
         {
-            return new[] { impact, precision, enchant };
+            return new[] {impact, precision, enchant};
         }
 
         public int GetPower()
         {
             int sum = 0;
-            foreach (int element in GetElements())
+            foreach(int element in GetElements())
                 sum += element;
             return sum;
         }

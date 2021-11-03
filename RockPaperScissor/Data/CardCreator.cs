@@ -1,4 +1,9 @@
-﻿using System;
+﻿using DSharpPlus.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace RockPaperScissor.Data
 {
@@ -6,8 +11,8 @@ namespace RockPaperScissor.Data
     {
         static public void GetStandartCardsToDeck(Deck deck)
         {
-            AddALotOFCardsToDeck(deck, "Pedra", new[] { 1, 0, 0 }, 0, 5);
-            AddALotOFCardsToDeck(deck, "Papel", new[] { 0, 0, 1 }, 0, 5);
+            AddALotOFCardsToDeck(deck, "Pedra",   new[] { 1, 0, 0 }, 0, 5);
+            AddALotOFCardsToDeck(deck, "Papel",   new[] { 0, 0, 1 }, 0, 5);
             AddALotOFCardsToDeck(deck, "Tesoura", new[] { 0, 1, 0 }, 0, 5);
         }
 

@@ -1,12 +1,13 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
-using DSharpPlus.Interactivity.Extensions;
-using RockPaperScissor.Data;
-using RockPaperScissor.Util;
-using System;
+using DSharpPlus.Entities;
+using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System;
+using DSharpPlus.Interactivity.Extensions;
+using RockPaperScissor.Util;
+using RockPaperScissor.Data;
 
 namespace RockPaperScissor.Commands
 {
@@ -16,16 +17,16 @@ namespace RockPaperScissor.Commands
 
 
         [Command("claim")]
-        [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
+        [RequireRoles(RoleCheckMode.All, new[] {AllGameData.NAME_OF_ROLE})]
         [RequireGuild]
         [Cooldown(1, AllGameData.TIME_TO_CLAIM_IN_SECONDS, CooldownBucketType.User)]
         public async Task ClaimCard(CommandContext ctx)
         {
             if (TodayIsPremiated()) await PremiateMemberWithCard(ctx);
-            else await ctx.Channel.SendMessageAsync("Você não foi premiado hoje...");
+            else                    await ctx.Channel.SendMessageAsync("Você não foi premiado hoje...");
 
             await ctx.Channel.SendMessageAsync(
-             $"Você só podera pedir novamente em {AllGameData.TIME_TO_CLAIM_IN_SECONDS / 60} minutos"
+             $"Você só podera pedir novamente em {AllGameData.TIME_TO_CLAIM_IN_SECONDS/60} minutos"
             );
         }
 
@@ -59,8 +60,8 @@ namespace RockPaperScissor.Commands
             await ctx.Channel.SendMessageAsync("Pababéns! Hoje você foi premiado! Envie a seguinte mensagem para determinar o foco de sua carta: Impacto 'imp' / Precisão 'pre' / Encanto 'enc'");
 
             var interativity = ctx.Client.GetInteractivity();
-            var result = await interativity.WaitForMessageAsync(m => m.Channel == ctx.Channel && m.Author == ctx.User).ConfigureAwait(false);
-            if (!result.TimedOut) return GetFocusIndex(result.Result.Content);
+            var result = await interativity.WaitForMessageAsync(m=>m.Channel == ctx.Channel && m.Author == ctx.User).ConfigureAwait(false);
+            if (!result.TimedOut)  return GetFocusIndex(result.Result.Content);
             return -1;
         }
 
@@ -97,20 +98,16 @@ namespace RockPaperScissor.Commands
             if (value <= 50)
             {
                 return 1;
-            }
-            else if (value <= 75)
+            } else if (value<=75)
             {
                 return 2;
-            }
-            else if (value <= 90)
+            } else if (value <= 90)
             {
                 return 3;
-            }
-            else if (value <= 98)
+            } else if (value <= 98)
             {
                 return 4;
-            }
-            else
+            } else
             {
                 return 5;
             }
@@ -120,8 +117,8 @@ namespace RockPaperScissor.Commands
         private int[] GetRandomElementsDistribuition(int quantElements, int focus)
         {
             int[] values = new int[3];
-            values[0] = rng.Next(0, (quantElements + 1) / 2);
-            values[0] = rng.Next(0, (quantElements + 1) / 2);
+            values[0] = rng.Next(0, (quantElements + 1)/2);
+            values[0] = rng.Next(0, (quantElements + 1)/2);
             values[1] = rng.Next(0, quantElements + 1 - values[0]);
             values[2] = quantElements - values[0] - values[1];
 
@@ -134,7 +131,7 @@ namespace RockPaperScissor.Commands
 
             var count = 0;
 
-            for (int i = 0; i < 3; i++)
+            for(int i = 0; i < 3; i++)
             {
                 if (elementsDestribution[i] == 0)
                 {
@@ -159,7 +156,7 @@ namespace RockPaperScissor.Commands
 
         private void PrintNewCardInfo(CommandContext ctx, Card newCard)
         {
-            ctx.Channel.SendMessageAsync("**Carta Criada com Sucesso:** " + newCard.ToString());
+            ctx.Channel.SendMessageAsync("**Carta Criada com Sucesso:** "+ newCard.ToString());
         }
 
 

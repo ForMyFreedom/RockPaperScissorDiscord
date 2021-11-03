@@ -1,8 +1,13 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System;
+using DSharpPlus.Interactivity.Extensions;
 using RockPaperScissor.Data;
 using RockPaperScissor.Util;
-using System.Threading.Tasks;
 
 namespace RockPaperScissor.Commands
 {
@@ -11,7 +16,7 @@ namespace RockPaperScissor.Commands
         [Command("create_duel_deck")]
         public async Task CreateDuelDeck(CommandContext ctx, int deckIndex, params int[] cardsListIndex)
         {
-            if (!await CreateDuelDataIsOk(ctx, deckIndex, cardsListIndex)) return;
+            if (! await CreateDuelDataIsOk(ctx, deckIndex, cardsListIndex))         return;
             AllGameData.GetMemberDeck(ctx.User.Id).SetDuelDeck(deckIndex, cardsListIndex);
             await ctx.Channel.SendMessageAsync($"O Deck {deckIndex} foi atualizado pelos valores {MyUtilities.GetArrayToString(cardsListIndex)}");
         }
@@ -35,11 +40,11 @@ namespace RockPaperScissor.Commands
 
         private async Task<bool> CreateDuelDataIsOk(CommandContext ctx, int deckIndex, int[] cardsListIndex)
         {
-            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, ctx.User.Id)) return false;
+            if (! await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, ctx.User.Id))  return false;
 
-            if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx.Channel)) return false;
+            if (! await ConditionsDiscordInterface.ChannelIsPrivate(ctx.Channel)) return false;
 
-            if (deckIndex > AllGameData.DUEL_DECKS_LENGTH || deckIndex < 0)
+            if (deckIndex > AllGameData.DUEL_DECKS_LENGTH  ||  deckIndex<0)
             {
                 await ctx.Channel.SendMessageAsync("O index do deck está errado");
                 return false;
@@ -51,7 +56,7 @@ namespace RockPaperScissor.Commands
                 return false;
             }
 
-            foreach (int index in cardsListIndex)
+            foreach(int index in cardsListIndex)
             {
                 if (AllGameData.GetMemberDeck(ctx.User.Id).GetCardById(index) == null)
                 {

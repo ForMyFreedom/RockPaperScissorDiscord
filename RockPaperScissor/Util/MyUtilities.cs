@@ -1,7 +1,12 @@
 ﻿using DSharpPlus;
-using RockPaperScissor.Data;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
+
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using RockPaperScissor.Data;
+using System.Text;
 using System.Linq;
 
 namespace RockPaperScissor.Util
@@ -13,7 +18,7 @@ namespace RockPaperScissor.Util
         public static String GetEmoteStars(int stars)
         {
             String starsString = "";
-            for (int i = 0; i < stars; i++) starsString += "★";
+            for (int i = 0; i < stars; i++)   starsString += "★";
             if (starsString == "") starsString = "0☆";
             return starsString;
         }
@@ -61,7 +66,7 @@ namespace RockPaperScissor.Util
 
             foreach (int cardIndex in duelDeck)
             {
-                if (!dontPrintThatCards.Contains(cardIndex))
+                if (! dontPrintThatCards.Contains(cardIndex))
                 {
                     str += "-\t " + AllGameData.GetMemberDeck(userId).GetCardById(cardIndex) + "\n";
                 }
@@ -78,15 +83,15 @@ namespace RockPaperScissor.Util
 
             while (firstId + distance != secondId)
             {
-                if (distance == arrayLength - firstId - 1)
+                if (distance == arrayLength-firstId-1)
                 {
-                    firstId = -(distance + 1);
+                    firstId = -(distance+1);
                 }
                 distance++;
             }
 
-            if (isHorary || distance == 0) return distance;
-            else return distance - arrayLength;
+            if (isHorary || distance==0) return distance;
+            else                         return distance - arrayLength;
         }
 
 
