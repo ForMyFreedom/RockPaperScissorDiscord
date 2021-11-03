@@ -1,10 +1,9 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
-using System.Threading.Tasks;
-using System;
 using DSharpPlus.Interactivity.Extensions;
 using RockPaperScissor.Util;
-using RockPaperScissor.Data;
+using System;
+using System.Threading.Tasks;
 
 namespace RockPaperScissor.Market
 {
@@ -25,9 +24,9 @@ namespace RockPaperScissor.Market
 
         protected async Task<bool> ConditionsAreOk(CommandContext ctx, DiscordMember member, int firstInt, int secondInt)
         {
-            if (! await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, member)) return false;
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, member)) return false;
 
-            if (! await ConditionsDiscordInterface.IsNotTheSameMember(ctx.Channel, ctx.Member, member)) return false;
+            if (!await ConditionsDiscordInterface.IsNotTheSameMember(ctx.Channel, ctx.Member, member)) return false;
 
             if (!EntryDataConditionsIsOk(ctx, member, firstInt, secondInt))
             {

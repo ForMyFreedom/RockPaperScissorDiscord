@@ -1,13 +1,8 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using DSharpPlus.Interactivity.Extensions;
-using RockPaperScissor.Util;
 using RockPaperScissor.Data;
+using System.Threading.Tasks;
 
 namespace RockPaperScissor.Commands
 {

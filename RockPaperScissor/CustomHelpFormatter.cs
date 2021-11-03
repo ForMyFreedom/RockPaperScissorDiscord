@@ -1,20 +1,12 @@
-﻿using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using DSharpPlus;
-using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Converters;
+﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Entities;
 using DSharpPlus.Entities;
-using DSharpPlus.Interactivity.Extensions;
-using System.Text;
 
 namespace RockPaperScissor
 {
     public class CustomHelpFormatter : DSharpPlus.CommandsNext.Converters.DefaultHelpFormatter
     {
-        public CustomHelpFormatter(CommandContext ctx) : base(ctx) {}
+        public CustomHelpFormatter(CommandContext ctx) : base(ctx) { }
 
         public override CommandHelpMessage Build()
         {

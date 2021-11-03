@@ -1,14 +1,9 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Linq;
-using System;
-using DSharpPlus.Interactivity.Extensions;
-using RockPaperScissor.Util;
-using RockPaperScissor.Market;
 using RockPaperScissor.Data;
+using RockPaperScissor.Market;
+using System.Threading.Tasks;
 
 namespace RockPaperScissor.Commands
 {
@@ -21,7 +16,7 @@ namespace RockPaperScissor.Commands
 
         [Command("sell")]
         [RequireGuild]
-        [RequireRoles(RoleCheckMode.All, new[] {AllGameData.NAME_OF_ROLE})]
+        [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
         [Description("Sugere troca com um **mestre**, de **sua carta** por **dinheiro dele**")]
         public async Task MakeCardSell(CommandContext ctx, DiscordMember member, int coinsQuant, int cardID)
         {
