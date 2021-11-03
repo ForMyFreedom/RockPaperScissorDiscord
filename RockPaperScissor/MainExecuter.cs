@@ -25,7 +25,6 @@ namespace RockPaperScissor
         }
 
 
-
         static private async Task StartAsyncBot()
         {
             CreateDiscordClient(GetDiscordConfiguration());
