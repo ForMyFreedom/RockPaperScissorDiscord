@@ -14,10 +14,10 @@ namespace RockPaperScissor.Text
             {"pt", new PortugueseTextGerenciator()}
         };
 
-        public static TextMessagesGerenciator GetGerenciator(String name)
+        public static TextMessagesGerenciator GetGerenciator(String abbreviation)
         {
-            if (GerenciatorDictionary.ContainsKey(name))
-                return GerenciatorDictionary[name];
+            if (GerenciatorDictionary.ContainsKey(abbreviation))
+                return GerenciatorDictionary[abbreviation];
             else
                 return GerenciatorDictionary["en"];
         }
