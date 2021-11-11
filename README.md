@@ -8,6 +8,7 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 ## CURRENT TO DO LIST
 - [ ] Implement the Duel
 - [ ] Create the another three focus alocation
+- [ ] Solve problems with private and server assumptions (There is no conection of an player and a server)
 - [ ] @
 
 ---
