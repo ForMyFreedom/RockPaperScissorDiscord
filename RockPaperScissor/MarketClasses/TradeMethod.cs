@@ -2,6 +2,7 @@
 using DSharpPlus.Entities;
 using RockPaperScissor.Data;
 using System;
+using System.Text.RegularExpressions;
 
 namespace RockPaperScissor.Market
 {
@@ -18,10 +19,9 @@ namespace RockPaperScissor.Market
 
         protected override string GetDealMessageContent(CommandContext ctx, DiscordMember member, int firstCardID, int secondCardID)
         {
-            String nameFirstCard = AllGameData.GetMemberDeck(ctx.Member).GetCardById(firstCardID).ToString();
-            String nameSecondCard = AllGameData.GetMemberDeck(member).GetCardById(secondCardID).ToString();
-            String messageContent = $"{ctx.Member.Nickname} lhe propõe a troca: \n Sua {nameSecondCard} \n Pela {nameFirstCard} que ele possui";
-            return messageContent;
+            String firstData = AllGameData.GetMemberDeck(ctx.Member).GetCardById(firstCardID).ToString();
+            String secondData = AllGameData.GetMemberDeck(member).GetCardById(secondCardID).ToString();
+            return OrganizeMessageContent(new[] { firstData, secondData });
         }
 
 

@@ -3,6 +3,7 @@ using RockPaperScissor.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RockPaperScissor.Text;
 
 namespace RockPaperScissor.Util
 {
@@ -56,7 +57,7 @@ namespace RockPaperScissor.Util
         {
             if (dontPrintThatCards == null) dontPrintThatCards = Array.Empty<int>();
 
-            String str = $"Deck de Duelo {duelDeckIndex}: \n";
+            String str = $"{AllGameData.messageGerenciator.DeckDuelName()} {duelDeckIndex}: \n";
             int[] duelDeck = AllGameData.GetMemberDeck(userId).GetDuelDeck(duelDeckIndex).ToArray();
 
             foreach (int cardIndex in duelDeck)

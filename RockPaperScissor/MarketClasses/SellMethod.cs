@@ -19,9 +19,9 @@ namespace RockPaperScissor.Market
 
         protected override string GetDealMessageContent(CommandContext ctx, DiscordMember member, int cardID, int coinsQuant)
         {
-            String nameCard = AllGameData.GetMemberDeck(ctx.Member).GetCardById(cardID).ToString();
-            String messageContent = $"{ctx.Member.Nickname} lhe propõe a troca: \n {coinsQuant} ℳ \n pela {nameCard} que ele possui";
-            return messageContent;
+            String firstData = coinsQuant.ToString();
+            String secondData = AllGameData.GetMemberDeck(ctx.Member).GetCardById(cardID).ToString();
+            return OrganizeMessageContent(new[] { firstData, secondData });
         }
 
 
