@@ -33,7 +33,6 @@ namespace RockPaperScissor.Util
                 {
                     //Add new Global vars here:
                     AllGameData.gameRoleID,
-                    AllGameData.GetMessageGerenciatorAbreviation()
                 };
                 String stringArray = SetArrayInStringArray(globalGameData) + "\n";
 
@@ -60,7 +59,8 @@ namespace RockPaperScissor.Util
                         deck.GetOwner(),
                         deck.GetCoins(),
                         deck.GetIDCounter(),
-                        GetStringOfArrayOfDuelDecks(deck)
+                        GetStringOfArrayOfDuelDecks(deck),
+                        deck.GetLanguage()
                 };
                     String stringDeckArray = SetArrayInStringArray(deckGameData) + "\n";
                     fileStream.Write(GetEncoding().GetBytes(stringDeckArray));
