@@ -16,6 +16,7 @@ namespace RockPaperScissor.Text
         public abstract String OnlyPrivateCall();
         public abstract String NotCallYourself();
         public abstract String LanguageChanged();
+        public abstract String LanguageRefused();
         public abstract String DeckDuelName();
         public abstract String DealMessageTemplate();
         public abstract String DealDeclined();

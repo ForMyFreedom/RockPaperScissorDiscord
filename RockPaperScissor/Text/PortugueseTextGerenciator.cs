@@ -44,6 +44,11 @@ namespace RockPaperScissor.Text
             return "Linguagem alterada para Português!";
         }
 
+        public override string LanguageRefused()
+        {
+            return "Essa linguagem não existe, por favor consulte as abreviações de linguagem no comando 'all_languages'";
+        }
+
         public override string DeckDuelName()
         {
             return "Deck de Duelo";
