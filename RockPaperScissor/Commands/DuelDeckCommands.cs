@@ -9,7 +9,6 @@ namespace RockPaperScissor.Commands
     public class DuelDeckCommands : MyBaseModule
     {
         [Command("create_duel_deck")]
-        [RequireRoles(RoleCheckMode.All, new[] {AllGameData.NAME_OF_ROLE})]
         public async Task CreateDuelDeck(CommandContext ctx, int deckIndex, params int[] cardsListIndex)
         {
             if (!await CreateDuelDataIsOk(ctx, deckIndex, cardsListIndex)) return;
@@ -20,9 +19,9 @@ namespace RockPaperScissor.Commands
 
 
         [Command("duel_deck")]
-        [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
         public async Task ShowDuelDeck(CommandContext ctx)
         {
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return;
             if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx)) return;
 
             for (int i = 0; i < AllGameData.DUEL_DECKS_LENGTH; i++)
@@ -36,6 +35,8 @@ namespace RockPaperScissor.Commands
 
         private async Task<bool> CreateDuelDataIsOk(CommandContext ctx, int deckIndex, int[] cardsListIndex)
         {
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return false;
+
             if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx)) return false;
 
             if (deckIndex > AllGameData.DUEL_DECKS_LENGTH || deckIndex < 0)

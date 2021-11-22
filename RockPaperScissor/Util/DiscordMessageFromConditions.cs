@@ -24,7 +24,7 @@ namespace RockPaperScissor.Util
             if (MyConditions.PlayerIsCardMaster(id)) return true;
             else
             {
-                await ctx.Channel.SendMessageAsync(TextSingleton.GetMemberGerenciator(ctx.Member).MemberDontHaveDeck());
+                await ctx.Channel.SendMessageAsync(TextSingleton.GetMemberGerenciator(id).MemberDontHaveDeck());
                 return false;
             }
         }

@@ -3,7 +3,9 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using RockPaperScissor.Data;
 using RockPaperScissor.Text;
+using RockPaperScissor.Util;
 using System.Threading.Tasks;
+
 
 namespace RockPaperScissor.Commands
 {
@@ -22,17 +24,18 @@ namespace RockPaperScissor.Commands
 
 
         [Command("language")]
-        [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
         public async Task ShowMemberLanguage(CommandContext ctx)
         {
+            if (! await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return;
             await ctx.Channel.SendMessageAsync(GetMessager(ctx).GetLanguageName());
         }
 
 
         [Command("language")]
-        [RequireRoles(RoleCheckMode.All, new[] {AllGameData.NAME_OF_ROLE})]
         public async Task ShowMemberLanguage(CommandContext ctx, string newLanguageAbbreviation)
         {
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return;
+
             if (TextSingleton.GetGerenciator(newLanguageAbbreviation) != null)
             {
                 AllGameData.GetMemberDeck(ctx.User.Id).SetLanguage(newLanguageAbbreviation);
