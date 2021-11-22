@@ -2,26 +2,44 @@
 using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
 using RockPaperScissor.Data;
+using RockPaperScissor.Text;
 using System.Threading.Tasks;
 
 namespace RockPaperScissor.Commands
 {
-    class LanguageCommands : BaseCommandModule
+    class LanguageCommands : Util.MyBaseModule
     {
-        [Command("language")]
-        [RequireGuild]
-        public async Task GetInterfaceLanguage(CommandContext ctx)
+        [Command("all_languages"), Aliases(new[]{"allang"})]
+        public async Task ShowAllLanguages(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync(AllGameData.messageGerenciator.GetLanguageName());
+            string allLanguages = "";
+            foreach(TextMessagesGerenciator language in TextSingleton.GerenciatorList)
+            {
+                allLanguages += $"{language.GetLanguageName()} | {language.GetLanguageAbbreviation()}\n";
+            }
+            await ctx.Channel.SendMessageAsync(allLanguages);
         }
 
 
         [Command("language")]
-        [RequireGuild]
-        public async Task GetInterfaceLanguage(CommandContext ctx, string newLanguageAbreviation)
+        public async Task ShowMemberLanguage(CommandContext ctx)
         {
-            AllGameData.SetMessageGerenciator(newLanguageAbreviation);
-            await ctx.Channel.SendMessageAsync(AllGameData.messageGerenciator.LanguageChanged());
+            await ctx.Channel.SendMessageAsync(GetMessager(ctx).GetLanguageName());
+        }
+
+
+        [Command("language")]
+        public async Task ShowMemberLanguage(CommandContext ctx, string newLanguageAbbreviation)
+        {
+            if (TextSingleton.GetGerenciator(newLanguageAbbreviation) != null)
+            {
+                AllGameData.GetMemberDeck(ctx.User.Id).SetLanguage(newLanguageAbbreviation);
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).LanguageChanged());
+            }
+            else
+            {
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).LanguageRefused());
+            }
         }
     }
 }
