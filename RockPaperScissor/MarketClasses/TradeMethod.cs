@@ -21,7 +21,7 @@ namespace RockPaperScissor.Market
         {
             String firstData = AllGameData.GetMemberDeck(ctx.Member).GetCardById(firstCardID).ToString();
             String secondData = AllGameData.GetMemberDeck(member).GetCardById(secondCardID).ToString();
-            return OrganizeMessageContent(new[] { firstData, secondData });
+            return OrganizeMessageContent(new[] { firstData, secondData }, ctx.Member);
         }
 
 
