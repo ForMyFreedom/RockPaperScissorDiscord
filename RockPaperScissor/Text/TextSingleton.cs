@@ -10,26 +10,20 @@ namespace RockPaperScissor.Text
 {
     public class TextSingleton
     {
-        public static Dictionary<String, TextMessagesGerenciator> GerenciatorDictionary = new Dictionary<string, TextMessagesGerenciator>()
+        public static List<TextMessagesGerenciator> GerenciatorList = new List<TextMessagesGerenciator>()
         {
-            {"en", new EnglishTextGerenciator()},
-            {"pt", new PortugueseTextGerenciator()}
+            new EnglishTextGerenciator(), new PortugueseTextGerenciator()
         };
+
 
         public static TextMessagesGerenciator GetGerenciator(String abbreviation)
         {
-            if (GerenciatorDictionary.ContainsKey(abbreviation))
-                return GerenciatorDictionary[abbreviation];
-            else
-                return GerenciatorDictionary["en"];
-        }
-
-        public static String GetAbbreviation(TextMessagesGerenciator gerenciator)
-        {
-            if (GerenciatorDictionary.ContainsValue(gerenciator))
-                return GerenciatorDictionary.FirstOrDefault(x => x.Value == gerenciator).Key;
-            else
-                return "en";
+            foreach(TextMessagesGerenciator language in GerenciatorList)
+            {
+                if (language.GetLanguageAbbreviation() == abbreviation)
+                    return language;
+            }
+            return null;
         }
 
         public static TextMessagesGerenciator GetMemberGerenciator(DiscordMember member)
