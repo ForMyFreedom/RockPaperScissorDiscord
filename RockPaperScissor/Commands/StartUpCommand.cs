@@ -16,7 +16,7 @@ namespace RockPaperScissor.Commands
             DiscordRole role = AllGameData.TryToGetGameRole(ctx);
             if (role == null)
             {
-                await ctx.Channel.SendMessageAsync($"**{GetMessager(ctx).StartWar()}**");
+                await ctx.Channel.SendMessageAsync($"**THE CARDS WAR HAS ITS BEGGIN!**");
                 DiscordRole gameRole = await ctx.Guild.CreateRoleAsync(AllGameData.NAME_OF_ROLE);
                 AllGameData.gameRoleID = gameRole.Id;
                 MainExecuter.RegisterDefaultCommands();

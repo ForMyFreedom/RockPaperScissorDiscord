@@ -22,6 +22,7 @@ namespace RockPaperScissor.Commands
 
 
         [Command("language")]
+        [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
         public async Task ShowMemberLanguage(CommandContext ctx)
         {
             await ctx.Channel.SendMessageAsync(GetMessager(ctx).GetLanguageName());
@@ -29,6 +30,7 @@ namespace RockPaperScissor.Commands
 
 
         [Command("language")]
+        [RequireRoles(RoleCheckMode.All, new[] {AllGameData.NAME_OF_ROLE})]
         public async Task ShowMemberLanguage(CommandContext ctx, string newLanguageAbbreviation)
         {
             if (TextSingleton.GetGerenciator(newLanguageAbbreviation) != null)
