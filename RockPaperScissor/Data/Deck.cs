@@ -10,6 +10,7 @@ namespace RockPaperScissor.Data
         ulong ownerID;
         int idCounter = 0;
         int coinsQuant;
+        string language;
         List<List<int>> duelDecksList;
 
 
@@ -21,16 +22,18 @@ namespace RockPaperScissor.Data
             ownerID = memberID;
             coinsQuant = 50;
             duelDecksList = new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH);
+            language = "en";
         }
 
 
-        public Deck(ulong memberID, int idCounter, int coinsQuant, List<List<int>> duelDecks)
+        public Deck(ulong memberID, int idCounter, int coinsQuant, List<List<int>> duelDecks, string language)
         {//Create new deck in load
             List<Card> allCards = new List<Card>(30);
             this.ownerID = memberID;
             this.idCounter = idCounter;
             this.coinsQuant = coinsQuant;
             this.duelDecksList = duelDecks;
+            this.language = language;
         }
 
 
@@ -135,6 +138,16 @@ namespace RockPaperScissor.Data
         public void PlusIdCounter()
         {
             idCounter++;
+        }
+
+        public string GetLanguage()
+        {
+            return language;
+        }
+
+        public void SetLanguage(String lan)
+        {
+            language = lan;
         }
 
     }
