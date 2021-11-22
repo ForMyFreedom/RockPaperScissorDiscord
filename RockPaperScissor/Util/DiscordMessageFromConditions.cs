@@ -1,73 +1,78 @@
 ﻿using DSharpPlus.Entities;
+using DSharpPlus.CommandsNext;
 using System.Threading.Tasks;
-using RockPaperScissor.Data;
+using RockPaperScissor.Text;
 //using RockPaperScissor.Duel;
 
 namespace RockPaperScissor.Util
 {
     public class ConditionsDiscordInterface
     {
-        public static async Task<bool> PlayerIsCardMaster(DiscordChannel channel, DiscordMember member)
+        public static async Task<bool> PlayerIsCardMaster(CommandContext ctx, DiscordMember member)
         {
             if (MyConditions.PlayerIsCardMaster(member)) return true;
             else
             {
-                await channel.SendMessageAsync(AllGameData.messageGerenciator.MemberDontHaveDeck());
+                await ctx.Channel.SendMessageAsync(TextSingleton.GetMemberGerenciator(ctx.Member).MemberDontHaveDeck());
                 return false;
             }
         }
 
 
-        public static async Task<bool> PlayerIsCardMaster(DiscordChannel channel, ulong id)
+        public static async Task<bool> PlayerIsCardMaster(CommandContext ctx, ulong id)
         {
             if (MyConditions.PlayerIsCardMaster(id)) return true;
             else
             {
-                await channel.SendMessageAsync(AllGameData.messageGerenciator.MemberDontHaveDeck());
+                await ctx.Channel.SendMessageAsync(TextSingleton.GetMemberGerenciator(ctx.Member).MemberDontHaveDeck());
                 return false;
             }
         }
 
 
-        public static async Task<bool> PlayerHasTheCardId(DiscordChannel channel, DiscordMember member, int cardID)
+        public static async Task<bool> PlayerHasTheCardId(CommandContext ctx, DiscordMember member, int cardID)
         {
             if (MyConditions.PlayerHasTheCardId(member, cardID)) return true;
             else
             {
-                await channel.SendMessageAsync(AllGameData.messageGerenciator.CardIdDontExist());
+                await ctx.Channel.SendMessageAsync(
+                    TextSingleton.GetMemberGerenciator(ctx.Member).CardIdDontExist());
                 return false;
             }
         }
 
 
-        public static async Task<bool> PlayerHasTheCoins(DiscordChannel channel, DiscordMember member, int coinsQuant)
+        public static async Task<bool> PlayerHasTheCoins(CommandContext ctx, DiscordMember member, int coinsQuant)
         {
             if (MyConditions.PlayerHasTheCoins(member, coinsQuant)) return true;
             else
             {
-                await channel.SendMessageAsync(AllGameData.messageGerenciator.NotEnoughCoins());
+                await ctx.Channel.SendMessageAsync(
+                    TextSingleton.GetMemberGerenciator(ctx.Member).NotEnoughCoins());
                 return false;
             }
         }
 
 
-        public static async Task<bool> ChannelIsPrivate(DiscordChannel channel)
+        public static async Task<bool> ChannelIsPrivate(CommandContext ctx)
         {
-            if (MyConditions.ChannelIsPrivate(channel)) return true;
+            if (MyConditions.ChannelIsPrivate(ctx.Channel)) return true;
             else
             {
-                await channel.SendMessageAsync(AllGameData.messageGerenciator.OnlyPrivateCall());
+                await ctx.Channel.SendMessageAsync(
+                    TextSingleton.GetMemberGerenciator(ctx.Member).OnlyPrivateCall());
                 return false;
             }
         }
 
 
-        public static async Task<bool> IsNotTheSameMember(DiscordChannel channel, DiscordMember member1, DiscordMember member2)
+        public static async Task<bool> IsNotTheSameMember(CommandContext ctx, DiscordMember member1, DiscordMember member2)
         {
             if (MyConditions.IsNotTheSameMember(member1, member2)) return true;
             else
             {
-                await channel.SendMessageAsync(AllGameData.messageGerenciator.NotCallYourself());
+                await ctx.Channel.SendMessageAsync(
+                    TextSingleton.GetMemberGerenciator(ctx.Member).NotCallYourself());
                 return false;
             }
         }

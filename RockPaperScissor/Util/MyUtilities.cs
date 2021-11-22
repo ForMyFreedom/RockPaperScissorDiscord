@@ -53,11 +53,10 @@ namespace RockPaperScissor.Util
 
 
         public static String GetDuelDeckCardsString(ulong userId, int duelDeckIndex, int[] dontPrintThatCards = null)
-
         {
             if (dontPrintThatCards == null) dontPrintThatCards = Array.Empty<int>();
 
-            String str = $"{AllGameData.messageGerenciator.DeckDuelName()} {duelDeckIndex}: \n";
+            String str = $"{TextSingleton.GetMemberGerenciator(userId).DeckDuelName()} {duelDeckIndex}: \n";
             int[] duelDeck = AllGameData.GetMemberDeck(userId).GetDuelDeck(duelDeckIndex).ToArray();
 
             foreach (int cardIndex in duelDeck)
