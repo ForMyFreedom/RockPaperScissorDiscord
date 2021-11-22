@@ -25,7 +25,6 @@ namespace RockPaperScissor.Text
         public abstract String EmojiDealReaction();
         public abstract String LackOfGoods();
         public abstract String DealSent();
-        public abstract String StartWar();
         public abstract String WarAlreadyStarted();
         public abstract String NotPremiated();
         public abstract String LostCardByError();

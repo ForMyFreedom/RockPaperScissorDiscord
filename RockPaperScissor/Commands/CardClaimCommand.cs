@@ -151,8 +151,8 @@ namespace RockPaperScissor.Commands
 
         private String GetRandomName(int quantElements, int focus, int[] elementsDistribution)
         {
-            String name = CardsNameList.GetFirstName(focus, elementsDistribution) + " ";
-            name += CardsNameList.GetSecondName(quantElements);
+            String name = CardsNameList.GetAdjectiveName(quantElements) + " ";
+            name += CardsNameList.GetBaseName(focus, elementsDistribution);
             return name;
         }
 

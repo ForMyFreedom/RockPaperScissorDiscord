@@ -89,11 +89,6 @@ namespace RockPaperScissor.Text
             return "Proposta enviada!";
         }
 
-        public override string StartWar()
-        {
-            return "A GUERRA DAS CARTAS TEM SEU INÍCIO!";
-        }
-
         public override string WarAlreadyStarted()
         {
             return "A guerra das cartas já teve seu início...";
@@ -168,44 +163,6 @@ namespace RockPaperScissor.Text
         {
             return "Você colocou mais cartas que o permitido";
         }
-
-
-
-        public override string[] ImpactNameList()
-        {
-            return new[] { "Dragão", "Baleia", "Bufalo", "Leão", "Martelo", "Bigorna", "Halter", "Canhão" };
-        }
-
-        public override string[] PrecisionNameList()
-        {
-            return new[] { "Pássaro", "Insetos", "Tigre", "Golfinho", "Adaga", "Flecha", "Pistola", "Agulha" };
-        }
-
-        public override string[] EnchantNameList()
-        {
-            return new[] { "Coruja", "Gato", "Borboleta", "Fada", "Varinha", "Grimório", "Mascara", "Anel" };
-        }
-
-        public override string[] MiddleNameList()
-        {
-            return new[] { "Macaco", "Lobo", "Cavalo", "Gavião", "Espada", "Machado", "Bola", "Lança" };
-        }
-
-        public override string[] WeakAdjectiveList()
-        {
-            return new[] { "Sutíl", "Banal", "Fracote", "Inútil" };
-        }
-
-        public override string[] MiddleAdjectiveList()
-        {
-            return new[] { "Refinado(a)", "Aprimado(a)", "Poderoso(a)", "Treinado(a)" };
-        }
-
-        public override string[] StrongAdjectiveList()
-        {
-            return new[] { "Divino(a)", "Demoniaco(a)", "Mestre", "Superior" };
-        }
-
 
     }
 }

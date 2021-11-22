@@ -33,7 +33,11 @@ namespace RockPaperScissor.Text
 
         public static TextMessagesGerenciator GetMemberGerenciator(ulong id)
         {
-            return GetGerenciator(AllGameData.GetMemberDeck(id).GetLanguage());
+            Deck deck = AllGameData.GetMemberDeck(id);
+            if (deck != null)
+                return GetGerenciator(deck.GetLanguage());
+            else
+                return GetGerenciator("en");
         }
 
         public static TextMessagesGerenciator GetMemberGerenciator(Deck deck)
