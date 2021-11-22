@@ -6,9 +6,9 @@ namespace RockPaperScissor.Data
     {
         static public void GetStandartCardsToDeck(Deck deck)
         {
-            AddALotOFCardsToDeck(deck, "⛰️", new[] { 1, 0, 0 }, 0, 5);
-            AddALotOFCardsToDeck(deck, "📜", new[] { 0, 0, 1 }, 0, 5);
-            AddALotOFCardsToDeck(deck, "✂️", new[] { 0, 1, 0 }, 0, 5);
+            AddALotOFCardsToDeck(deck, "Rock", new[] { 1, 0, 0 }, 0, 5);
+            AddALotOFCardsToDeck(deck, "Paper", new[] { 0, 0, 1 }, 0, 5);
+            AddALotOFCardsToDeck(deck, "Scissor", new[] { 0, 1, 0 }, 0, 5);
         }
 
 

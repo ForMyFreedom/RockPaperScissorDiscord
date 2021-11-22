@@ -88,11 +88,6 @@ namespace RockPaperScissor.Text
             return "Deal sent!";
         }
 
-        public override string StartWar()
-        {
-            return "THE CARDS WAR HAS ITS BEGGIN!";
-        }
-
         public override string WarAlreadyStarted()
         {
             return "The Cards War has already started...";
@@ -170,39 +165,5 @@ namespace RockPaperScissor.Text
 
 
 
-        public override string[] ImpactNameList()
-        {
-            return new[] { "Dragon", "Whale", "Buffalo", "Lion", "Hammer", "Anvil", "Dumbbell", "Cannon" };
-        }
-
-        public override string[] PrecisionNameList()
-        {
-            return new[] { "Bird", "Insects", "Tiger", "Dolphin", "Dagger", "Arrow", "Pistol", "Needle" };
-        }
-
-        public override string[] EnchantNameList()
-        {
-            return new[] { "Owl", "Cat", "Butterfly", "Fairy", "Wand", "Grimoire", "Mask", "Ring" };
-        }
-
-        public override string[] MiddleNameList()
-        {
-            return new[] { "Monkey", "Wolf", "Horse", "Hawk", "Sword", "Axe", "Ball", "Spear" };
-        }
-
-        public override string[] WeakAdjectiveList()
-        {
-            return new[] { "Subtle", "Trivial", "Weak", "Useless" };
-        }
-
-        public override string[] MiddleAdjectiveList()
-        {
-            return new[] { "Refined", "Improved", "Powerfull", "Trained" };
-        }
-
-        public override string[] StrongAdjectiveList()
-        {
-            return new[] { "Divine", "Demonic", "Master", "Supreme" };
-        }
     }
 }

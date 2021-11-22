@@ -42,26 +42,5 @@ namespace RockPaperScissor.Text
         public abstract String WrongDeckIndex();
         public abstract String MoreCardsThatIsPermitted();
 
-        public abstract String[] ImpactNameList();
-        public abstract String[] PrecisionNameList();
-        public abstract String[] EnchantNameList();
-        public abstract String[] MiddleNameList();
-        public abstract String[] WeakAdjectiveList();
-        public abstract String[] MiddleAdjectiveList();
-        public abstract String[] StrongAdjectiveList();
-
-
-
-        public String[] GetAllCardsNames()
-        {
-            String[] strList = ImpactNameList();
-            strList = strList.Concat(PrecisionNameList()).ToArray();
-            strList = strList.Concat(EnchantNameList()).ToArray();
-            strList = strList.Concat(MiddleNameList()).ToArray();
-            strList = strList.Concat(WeakAdjectiveList()).ToArray();
-            strList = strList.Concat(MiddleAdjectiveList()).ToArray();
-            strList = strList.Concat(StrongAdjectiveList()).ToArray();
-            return strList;
-        }
     }
 }
