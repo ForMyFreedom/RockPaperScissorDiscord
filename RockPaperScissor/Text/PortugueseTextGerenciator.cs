@@ -13,6 +13,11 @@ namespace RockPaperScissor.Text
             return "Português [Portuguese]";
         }
 
+        public override string GetLanguageAbbreviation()
+        {
+            return "pt";
+        }
+
 
         public override string MemberDontHaveDeck()
         {
@@ -84,6 +89,86 @@ namespace RockPaperScissor.Text
             return "Proposta enviada!";
         }
 
+        public override string StartWar()
+        {
+            return "A GUERRA DAS CARTAS TEM SEU INÍCIO!";
+        }
+
+        public override string WarAlreadyStarted()
+        {
+            return "A guerra das cartas já teve seu início...";
+        }
+
+        public override string NotPremiated()
+        {
+            return "Você não foi premiado hoje...";
+        }
+
+        public override string LostCardByError()
+        {
+            return "Você cometeu um erro e por isso perdeu sua carta";
+        }
+
+        public override string ExplaningPremiation()
+        {
+            return "Pababéns! Você foi premiado! Envie a seguinte mensagem para determinar o foco de sua carta: Impacto 'imp' / Precisão 'pre' / Encanto 'enc'";
+        }
+
+        public override string SuccessfulCardCreation()
+        {
+            return "CARTA CRIADA COM SUCESSO";
+        }
+
+        public override string TellAboutCooldown()
+        {
+            return "Você só podera pedir novamente após essa quantidade de minutos";
+        }
+
+        public override string RemovedCard()
+        {
+            return "Carta removida";
+        }
+
+        public override string InvalidCardId()
+        {
+            return "ID de carta invalido";
+        }
+
+        public override string NeedCoinsToReset(int quant)
+        {
+            return $"Você precisa ter pelo menos {quant}ℳ para resetar o seu deck";
+        }
+
+        public override string DeckCreatedSuccessfully()
+        {
+            return "Deck Criado com Sucesso!";
+        }
+
+        public override string AreYouSureToDeleteTheDeck()
+        {
+            return "Você tem certeza que deseja deletar todo seu deck e deixar de ser um guerreiro das cartas? Envie um '.' para confirmar";
+        }
+
+        public override string FarewellMate()
+        {
+            return "Deck deletado com sucesso... Um adeus, velho mestre das cartas...";
+        }
+
+        public override string DuelDeckActualized()
+        {
+            return "O Deck de Duelo foi atualizado pelos novos valores";
+        }
+
+        public override string WrongDeckIndex()
+        {
+            return "O index do deck está errado";
+        }
+
+        public override string MoreCardsThatIsPermitted()
+        {
+            return "Você colocou mais cartas que o permitido";
+        }
+
 
 
         public override string[] ImpactNameList()
@@ -120,5 +205,7 @@ namespace RockPaperScissor.Text
         {
             return new[] { "Divino(a)", "Demoniaco(a)", "Mestre", "Superior" };
         }
+
+
     }
 }

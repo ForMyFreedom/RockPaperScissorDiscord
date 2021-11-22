@@ -13,6 +13,11 @@ namespace RockPaperScissor.Text
             return "English";
         }
 
+        public override string GetLanguageAbbreviation()
+        {
+            return "en";
+        }
+
         public override string MemberDontHaveDeck()
         {
             return "The mentioned member doesn't have a deck";
@@ -80,7 +85,87 @@ namespace RockPaperScissor.Text
 
         public override string DealSent()
         {
-            return "Proposta enviada!";
+            return "Deal sent!";
+        }
+
+        public override string StartWar()
+        {
+            return "THE CARDS WAR HAS ITS BEGGIN!";
+        }
+
+        public override string WarAlreadyStarted()
+        {
+            return "The Cards War has already started...";
+        }
+
+        public override string NotPremiated()
+        {
+            return "You was not premiated today...";
+        }
+
+        public override string LostCardByError()
+        {
+            return "You commited an error and for this you lost your card";
+        }
+
+        public override string ExplaningPremiation()
+        {
+            return "Congratulations! You were premiated! Send the following message to determine your cards focus: Impact 'imp' / Precision 'pre' / Enchant 'enc'";
+        }
+
+        public override string SuccessfulCardCreation()
+        {
+            return "CARD CREATED SUCCESSFULLY";
+        }
+
+        public override string TellAboutCooldown()
+        {
+            return "You may only request again after this amount of minutes";
+        }
+
+        public override string RemovedCard()
+        {
+            return "Card removed";
+        }
+
+        public override string InvalidCardId()
+        {
+            return "Invalid Card ID";
+        }
+
+        public override string NeedCoinsToReset(int quant)
+        {
+            return $"You need at least {quant}ℳ to reset your deck";
+        }
+
+        public override string DeckCreatedSuccessfully()
+        {
+            return "Deck created successfully!";
+        }
+
+        public override string AreYouSureToDeleteTheDeck()
+        {
+            return "Are you sure that want delete your deck and stop being a card warrior? Send a '.' to confirm";
+        }
+
+        public override string FarewellMate()
+        {
+            return "Deck deleted successfully... Farewell, old card master...";
+        }
+
+        public override string DuelDeckActualized()
+        {
+            return "The Duel Deck was actualized for the new values";
+        }
+
+        public override string WrongDeckIndex()
+        {
+            return "The index of the deck is wrong";
+        }
+
+        public override string MoreCardsThatIsPermitted()
+        {
+            return "You put more cards than is permitted";
         }
 
 

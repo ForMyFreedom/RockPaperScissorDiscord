@@ -9,6 +9,7 @@ namespace RockPaperScissor.Text
     public abstract class TextMessagesGerenciator
     {
         public abstract String GetLanguageName();
+        public abstract String GetLanguageAbbreviation();
 
         public abstract String MemberDontHaveDeck();
         public abstract String CardIdDontExist();
@@ -24,6 +25,22 @@ namespace RockPaperScissor.Text
         public abstract String EmojiDealReaction();
         public abstract String LackOfGoods();
         public abstract String DealSent();
+        public abstract String StartWar();
+        public abstract String WarAlreadyStarted();
+        public abstract String NotPremiated();
+        public abstract String LostCardByError();
+        public abstract String ExplaningPremiation();
+        public abstract String SuccessfulCardCreation();
+        public abstract String TellAboutCooldown();
+        public abstract String RemovedCard();
+        public abstract String InvalidCardId();
+        public abstract String NeedCoinsToReset(int quant);
+        public abstract String DeckCreatedSuccessfully();
+        public abstract String AreYouSureToDeleteTheDeck();
+        public abstract String FarewellMate();
+        public abstract String DuelDeckActualized();
+        public abstract String WrongDeckIndex();
+        public abstract String MoreCardsThatIsPermitted();
 
         public abstract String[] ImpactNameList();
         public abstract String[] PrecisionNameList();
@@ -32,5 +49,19 @@ namespace RockPaperScissor.Text
         public abstract String[] WeakAdjectiveList();
         public abstract String[] MiddleAdjectiveList();
         public abstract String[] StrongAdjectiveList();
+
+
+
+        public String[] GetAllCardsNames()
+        {
+            String[] strList = ImpactNameList();
+            strList = strList.Concat(PrecisionNameList()).ToArray();
+            strList = strList.Concat(EnchantNameList()).ToArray();
+            strList = strList.Concat(MiddleNameList()).ToArray();
+            strList = strList.Concat(WeakAdjectiveList()).ToArray();
+            strList = strList.Concat(MiddleAdjectiveList()).ToArray();
+            strList = strList.Concat(StrongAdjectiveList()).ToArray();
+            return strList;
+        }
     }
 }
