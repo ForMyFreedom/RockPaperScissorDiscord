@@ -8,7 +8,12 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 ## CURRENT TO DO LIST
 - [ ] Implement the Duel
 - [ ] Create the another three focus alocation
-- [ ] @
+- [ ] There is no logic in element when the card does not correspond to the chosen element. Advantage need to be re-write
+
+## DECTECTED BUGS
+- [x] When you make a trade which you dispense a card, the duel_deck won't remove it. It turns a ghost card!
+- [x] It is possible to create a duel_deck with repeated card index
+- [ ] Is possible to change your duel_deck while the game is occurring
 
 ---
 ---
@@ -112,3 +117,4 @@ The Standard Duel (3 Cards, Not equal Star, Without bet) follows the following p
 
 ## FUTURE TO DO LIST
 - [ ] Events in which the participants do quest and receive tematic cards
+- [ ] Maybe a market where you can buy cards from the system? idk, i think coins are a little useless
