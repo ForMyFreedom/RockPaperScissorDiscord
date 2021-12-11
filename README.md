@@ -6,14 +6,15 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 
 
 ## CURRENT TO DO LIST
-- [ ] Implement the Duel
+- [x] Implement the Bases of Duel
+- [ ] Implement the Duel Variations of Game and WinLoseConditions
 - [ ] Create the another three focus alocation
 - [ ] There is no logic in element when the card does not correspond to the chosen element. Advantage need to be re-write
 
 ## DECTECTED BUGS
 - [x] When you make a trade which you dispense a card, the duel_deck won't remove it. It turns a ghost card!
 - [x] It is possible to create a duel_deck with repeated card index
-- [ ] Is possible to change your duel_deck while the game is occurring
+- [x] Is possible to change your duel_deck while the game is occurring
 
 ---
 ---

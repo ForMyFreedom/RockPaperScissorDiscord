@@ -66,7 +66,7 @@ namespace RockPaperScissor
             discord.UseInteractivity(new InteractivityConfiguration()
             {
                 PollBehaviour = PollBehaviour.KeepEmojis,
-                Timeout = TimeSpan.FromMinutes(1)
+                Timeout = TimeSpan.FromSeconds(30)
             });
         }
 
