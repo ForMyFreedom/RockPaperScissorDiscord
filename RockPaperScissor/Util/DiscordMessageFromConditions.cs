@@ -1,8 +1,9 @@
 ﻿using DSharpPlus.Entities;
 using DSharpPlus.CommandsNext;
 using System.Threading.Tasks;
+using RockPaperScissor.Data;
+using RockPaperScissor.Duel;
 using RockPaperScissor.Text;
-//using RockPaperScissor.Duel;
 
 namespace RockPaperScissor.Util
 {
@@ -76,6 +77,26 @@ namespace RockPaperScissor.Util
                 return false;
             }
         }
+      
+      
+        public static async Task<bool> IsAdequatedDuelDeckToTheGameStyle(DiscordChannel channel, DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
+        {
+            if (MyConditions.IsAdequatedDuelDeckToTheGameStyle(member, duelDeckIndex, duelStatus)) return true;
+            else
+            {
+                await channel.SendMessageAsync("O Deck de Duelo não está adequado ao formato do duelo");
+                return false;
+            }
+        }
 
+        public static async Task<bool> IsNotDueling(DiscordChannel channel, DiscordUser user)
+        {
+            if (MyConditions.IsNotDueling(user)) return true;
+            else
+            {
+                await channel.SendMessageAsync("Voce não pode usar essa ação enquanto duelar!");
+                return false;
+            }
+        }
     }
 }

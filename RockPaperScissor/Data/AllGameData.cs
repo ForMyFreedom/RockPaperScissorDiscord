@@ -86,10 +86,10 @@ namespace RockPaperScissor.Data
 
 
 
-        static public void MakeTransference(DiscordMember firstMember, DiscordMember secondMember, int coinsQuant)
+        static public void MakeTransference(DiscordMember payer, DiscordMember reciver, int coinsQuant)
         {
-            GetMemberDeck(firstMember).RemoveCoins(coinsQuant);
-            GetMemberDeck(secondMember).AddCoins(coinsQuant);
+            GetMemberDeck(payer).RemoveCoins(coinsQuant);
+            GetMemberDeck(reciver).AddCoins(coinsQuant);
         }
 
 

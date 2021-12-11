@@ -65,7 +65,7 @@ namespace RockPaperScissor
             discord.UseInteractivity(new InteractivityConfiguration()
             {
                 PollBehaviour = PollBehaviour.KeepEmojis,
-                Timeout = TimeSpan.FromMinutes(1)
+                Timeout = TimeSpan.FromSeconds(30)
             });
         }
 
@@ -91,6 +91,7 @@ namespace RockPaperScissor
             commands.RegisterCommands<Commands.CardClaimCommand>();
             commands.RegisterCommands<Commands.GameMarketCommands>();
             commands.RegisterCommands<Commands.DuelDeckCommands>();
+            commands.RegisterCommands<Commands.BattleCommands>();
             commands.RegisterCommands<Commands.LanguageCommands>();
         }
 

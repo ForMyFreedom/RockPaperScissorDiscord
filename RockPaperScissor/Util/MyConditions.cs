@@ -1,11 +1,25 @@
 ﻿using DSharpPlus.Entities;
+using System.Collections.Generic;
 using RockPaperScissor.Data;
-//using RockPaperScissor.Duel;
+using RockPaperScissor.Duel;
 
 namespace RockPaperScissor.Util
 {
     public class MyConditions
     {
+        public static bool CardInADuelDeck(DiscordMember member, int cardID)
+        {
+            foreach (List<int> duelDeck in AllGameData.GetMemberDeck(member).GetAllDuelDecks())
+            {
+                foreach(int id in duelDeck)
+                {
+                    if (id == cardID)
+                        return true;
+                }
+            }
+            return false;
+        }
+
         public static bool PlayerIsCardMaster(DiscordMember member)
         {
             return AllGameData.GetMemberDeck(member) != null;
@@ -41,11 +55,14 @@ namespace RockPaperScissor.Util
             return member1 != member2;
         }
 
-        /*
         public static bool IsAdequatedDuelDeckToTheGameStyle(DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
         {
             return duelStatus.GetQuantOfCards() == AllGameData.GetMemberDeck(member).GetDuelDeck(duelDeckIndex).ToArray().Length;
         }
-        */
+
+        public static bool IsNotDueling(DiscordUser user)
+        {
+            return ! AllGameData.GetMemberDeck(user.Id).GetDueling();
+        }
     }
 }

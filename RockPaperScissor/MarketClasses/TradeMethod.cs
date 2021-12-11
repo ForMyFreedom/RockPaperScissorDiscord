@@ -13,7 +13,9 @@ namespace RockPaperScissor.Market
             return
             (
                 PlayerHasTheCardId(ctx.Member, firstCardID) &&
-                PlayerHasTheCardId(member, secondCardID)
+                !CardInADuelDeck(ctx.Member, firstCardID) &&
+                PlayerHasTheCardId(member, secondCardID) &&
+                !CardInADuelDeck(member, secondCardID)
             );
         }
 

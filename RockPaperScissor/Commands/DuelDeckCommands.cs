@@ -3,6 +3,9 @@ using DSharpPlus.CommandsNext.Attributes;
 using RockPaperScissor.Data;
 using RockPaperScissor.Util;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace RockPaperScissor.Commands
 {
@@ -11,7 +14,7 @@ namespace RockPaperScissor.Commands
         [Command("create_duel_deck")]
         public async Task CreateDuelDeck(CommandContext ctx, int deckIndex, params int[] cardsListIndex)
         {
-            if (!await CreateDuelDataIsOk(ctx, deckIndex, cardsListIndex)) return;
+            if (!await CreateDuelDeckDataIsOk(ctx, deckIndex, cardsListIndex)) return;
             AllGameData.GetMemberDeck(ctx.User.Id).SetDuelDeck(deckIndex, cardsListIndex);
             await ctx.Channel.SendMessageAsync(GetMessager(ctx).DuelDeckActualized());
         }
@@ -33,11 +36,11 @@ namespace RockPaperScissor.Commands
 
 
 
-        private async Task<bool> CreateDuelDataIsOk(CommandContext ctx, int deckIndex, int[] cardsListIndex)
+        private async Task<bool> CreateDuelDeckDataIsOk(CommandContext ctx, int deckIndex, int[] cardsListIndex)
         {
-            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return false;
-
-            if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx)) return false;
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, ctx.User.Id)) return false;
+            if (!await ConditionsDiscordInterface.IsNotDueling(ctx.Channel, ctx.User)) return false;
+            if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx.Channel)) return false;
 
             if (deckIndex > AllGameData.DUEL_DECKS_LENGTH || deckIndex < 0)
             {
@@ -58,6 +61,13 @@ namespace RockPaperScissor.Commands
                     await ctx.Channel.SendMessageAsync(GetMessager(ctx).InvalidCardId());
                     return false;
                 }
+            }
+
+            List<int> list = cardsListIndex.ToList();
+            if(! list.TrueForAll(s => list.FindAll(g => g == s).Count == 1))
+            {
+                await ctx.Channel.SendMessageAsync("Você não pode repetir cartas");
+                return false;
             }
 
             return true;

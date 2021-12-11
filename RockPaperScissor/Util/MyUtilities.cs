@@ -90,7 +90,21 @@ namespace RockPaperScissor.Util
         }
 
 
-
+        public static string GetElementalName(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    return "IMP";
+                case 1:
+                    return "PRE";
+                case 2:
+                    return "ENC";
+                case 3:
+                    return "POD";
+            }
+            return "";
+        }
 
 
         /* @With a more stable server...

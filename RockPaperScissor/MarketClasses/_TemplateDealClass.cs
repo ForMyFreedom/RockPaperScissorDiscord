@@ -32,7 +32,7 @@ namespace RockPaperScissor.Market
 
             if (!EntryDataConditionsIsOk(ctx, member, firstInt, secondInt))
             {
-                await ctx.Channel.SendMessageAsync(TextSingleton.GetMemberGerenciator(ctx.Member).LackOfGoods());
+                await ctx.Channel.SendMessageAsync("Você pode ter cometido um erro ou a carta referênciada esta bloqueada para venda");
                 return false;
             }
 
@@ -96,7 +96,7 @@ namespace RockPaperScissor.Market
 
         protected bool PlayerHasTheCardId(DiscordMember member, int cardID) { return MyConditions.PlayerHasTheCardId(member, cardID); }
         protected bool PlayerHasTheCoins(DiscordMember member, int coinsQuant) { return MyConditions.PlayerHasTheCoins(member, coinsQuant); }
-
+        protected bool CardInADuelDeck(DiscordMember member, int cardID) { return MyConditions.CardInADuelDeck(member, cardID); }
 
     }
 }
