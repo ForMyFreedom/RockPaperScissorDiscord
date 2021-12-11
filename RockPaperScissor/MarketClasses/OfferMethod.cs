@@ -12,7 +12,8 @@ namespace RockPaperScissor.Market
             return
             (
                 PlayerHasTheCoins(ctx.Member, coinsQuant) &&
-                PlayerHasTheCardId(member, cardID)
+                PlayerHasTheCardId(member, cardID) &&
+                !CardInADuelDeck(member, cardID)
             );
         }
 

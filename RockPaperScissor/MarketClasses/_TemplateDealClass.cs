@@ -74,7 +74,7 @@ namespace RockPaperScissor.Market
 
         protected bool PlayerHasTheCardId(DiscordMember member, int cardID) { return MyConditions.PlayerHasTheCardId(member, cardID); }
         protected bool PlayerHasTheCoins(DiscordMember member, int coinsQuant) { return MyConditions.PlayerHasTheCoins(member, coinsQuant); }
-
+        protected bool CardInADuelDeck(DiscordMember member, int cardID) { return MyConditions.CardInADuelDeck(member, cardID); }
 
     }
 }
