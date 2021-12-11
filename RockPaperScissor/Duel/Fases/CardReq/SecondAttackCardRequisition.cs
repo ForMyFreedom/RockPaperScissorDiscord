@@ -35,7 +35,7 @@ namespace RockPaperScissor.Duel.Fases.CardReq
 
         protected override bool TryGetTheCards(string message)
         {
-            if (Regex.IsMatch(message, "[0-9]+"))
+            if (Regex.IsMatch(message, "^[0-9]+$"))
             {
                 int cardIndexInt = int.Parse(message);
                 if (IndexIsInTheFront(cardIndexInt))
