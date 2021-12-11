@@ -1,68 +1,50 @@
 ﻿using System;
+using RockPaperScissor.Text;
 
 namespace RockPaperScissor.Util
 {
     static class CardsNameList
     {
-        static String[] impactList = new[] { "Dragão", "Baleia", "Bufalo", "Leão", "Martelo", "Bigorna", "Altere", "Canhão" };
-        static String[] precisionList = new[] { "Pássaro", "Insetos", "Tigre", "Golfinho", "Adaga", "Flecha", "Pistola", "Agulha" };
-        static String[] enchantList = new[] { "Coruja", "Gato", "Borboleta", "Fada", "Varinha", "Grimório", "Mascara", "Anel" };
-        static String[] middleList = new[] { "Macaco", "Lobo", "Cavalo", "Gavião", "Espada", "Machado", "Bola", "Lança" };
-
-        static String[] weakAdject = new[] { "Sutíl", "Banal", "Fracote", "Inútil" };
-        static String[] middleAdject = new[] { "Refinado(a)", "Aprimado(a)", "Poderoso(a)", "Treinado(a)" };
-        static String[] strongAdject = new[] { "Divino(a)", "Demoniaco(a)", "Mestre", "Superior" };
-
+        static string[] ImpactName = new[] { "Dragon", "Whale", "Buffalo", "Lion", "Hammer", "Anvil", "Dumbbell", "Cannon" };
+        static string[] PrecisionName = new[] { "Bird", "Insects", "Tiger", "Dolphin", "Dagger", "Arrow", "Pistol", "Needle" };
+        static string[] EnchantName = new[] { "Owl", "Cat", "Butterfly", "Fairy", "Wand", "Grimoire", "Mask", "Ring" };
+        static string[] MiddleName = new[] { "Monkey", "Wolf", "Horse", "Hawk", "Sword", "Axe", "Ball", "Spear" };
+        static string[] WeakAdjective = new[] { "Subtle", "Trivial", "Weak", "Useless" };
+        static string[] MiddleAdjective = new[] { "Refined", "Improved", "Powerfull", "Trained" };
+        static string[] StrongAdjective = new[] { "Divine", "Demonic", "Master", "Supreme" };
 
         static Random rng = new Random();
 
-
-        public static String GetImpactName() { return impactList[rng.Next(0, impactList.Length + 1)]; }
-        public static String GetPrecisionName() { return precisionList[rng.Next(0, precisionList.Length + 1)]; }
-        public static String GetEnchantName() { return enchantList[rng.Next(0, enchantList.Length + 1)]; }
-        public static String GetMiddleName() { return middleList[rng.Next(0, middleList.Length + 1)]; }
-
-        public static String GetWeakAdject() { return weakAdject[rng.Next(0, weakAdject.Length + 1)]; }
-        public static String GetMiddleAdject() { return middleAdject[rng.Next(0, middleAdject.Length + 1)]; }
-        public static String GetStrongAdject() { return strongAdject[rng.Next(0, strongAdject.Length + 1)]; }
+        public static String GetRandomElement(String[] list) { return list[rng.Next(0, list.Length + 1)]; }
 
 
-
-        public static String GetFirstName(int focus, int[] elementsDestribution)
+        public static String GetBaseName(int focus, int[] elementsDestribution)
         {
             focus = IsMiddleDestribution(elementsDestribution) ? 3 : focus;
 
             switch (focus)
             {
                 case 0:
-                    return GetImpactName();
+                    return GetRandomElement(ImpactName);
                 case 1:
-                    return GetPrecisionName();
+                    return GetRandomElement(PrecisionName);
                 case 2:
-                    return GetEnchantName();
+                    return GetRandomElement(EnchantName);
                 default:
-                    return GetMiddleName();
+                    return GetRandomElement(MiddleName);
             }
         }
 
 
-        public static String GetSecondName(int quantElements)
+        public static String GetAdjectiveName(int quantElements)
         {
             if (quantElements < 5)
-            {
-                return GetWeakAdject();
-            }
+                return GetRandomElement(WeakAdjective);
             else if (quantElements < 10)
-            {
-                return GetMiddleAdject();
-            }
+                return GetRandomElement(MiddleAdjective);
             else
-            {
-                return GetStrongAdject();
-            }
+                return GetRandomElement(StrongAdjective);
         }
-
-
 
 
 
@@ -76,6 +58,12 @@ namespace RockPaperScissor.Util
                 sumDif += actualDif;
             }
             return sumDif <= 4;
+        }
+
+
+        private static TextMessagesGerenciator EnglishGerenciator()
+        {
+            return TextSingleton.GetGerenciator("en");
         }
     }
 }

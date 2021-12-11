@@ -25,7 +25,6 @@ namespace RockPaperScissor
         }
 
 
-
         static private async Task StartAsyncBot()
         {
             CreateDiscordClient(GetDiscordConfiguration());
@@ -93,6 +92,7 @@ namespace RockPaperScissor
             commands.RegisterCommands<Commands.GameMarketCommands>();
             commands.RegisterCommands<Commands.DuelDeckCommands>();
             commands.RegisterCommands<Commands.BattleCommands>();
+            commands.RegisterCommands<Commands.LanguageCommands>();
         }
 
 

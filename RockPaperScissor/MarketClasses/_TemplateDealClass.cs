@@ -4,6 +4,8 @@ using DSharpPlus.Interactivity.Extensions;
 using RockPaperScissor.Util;
 using System;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
+using RockPaperScissor.Text;
 
 namespace RockPaperScissor.Market
 {
@@ -13,7 +15,7 @@ namespace RockPaperScissor.Market
         {
             if (!await ConditionsAreOk(ctx, member, firstInt, secondInt)) return;
 
-            await ctx.Channel.SendMessageAsync("Proposta enviada!");
+            await ctx.Channel.SendMessageAsync(TextSingleton.GetMemberGerenciator(ctx.Member).DealSent());
             bool proposeAcepted = await SendOfferToSecond(ctx, member, firstInt, secondInt);
 
             await ConsidereResultOfDeal(proposeAcepted, ctx, member, firstInt, secondInt);
@@ -24,9 +26,9 @@ namespace RockPaperScissor.Market
 
         protected async Task<bool> ConditionsAreOk(CommandContext ctx, DiscordMember member, int firstInt, int secondInt)
         {
-            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, member)) return false;
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, member)) return false;
 
-            if (!await ConditionsDiscordInterface.IsNotTheSameMember(ctx.Channel, ctx.Member, member)) return false;
+            if (!await ConditionsDiscordInterface.IsNotTheSameMember(ctx, ctx.Member, member)) return false;
 
             if (!EntryDataConditionsIsOk(ctx, member, firstInt, secondInt))
             {
@@ -42,7 +44,7 @@ namespace RockPaperScissor.Market
         {
             String messageContent = GetDealMessageContent(ctx, member, firstCardID, secondCardID);
             await member.SendMessageAsync(messageContent);
-            var message = await member.SendMessageAsync("\n **Reaja essa mensagem com algum emoji caso aceite a troca**");
+            var message = await member.SendMessageAsync($"\n **{TextSingleton.GetMemberGerenciator(ctx.Member).EmojiDealReaction()}**");
 
             var result = await message.WaitForReactionAsync(member);
             if (!result.TimedOut) return true;
@@ -52,15 +54,35 @@ namespace RockPaperScissor.Market
 
         protected async Task ConsidereResultOfDeal(bool proposeAcepted, CommandContext ctx, DiscordMember member, int firstInt, int secondInt)
         {
+            String subjectOfMessage;
             if (proposeAcepted)
             {
                 MakeTheDeal(ctx.Member, member, firstInt, secondInt);
-                await ctx.Channel.SendMessageAsync($"{ctx.Member.Nickname}... {member.Nickname} aceitou sua proposta. Troca realizada!");
+                subjectOfMessage = TextSingleton.GetMemberGerenciator(ctx.Member).DealAccepted();
             }
             else
             {
-                await ctx.Channel.SendMessageAsync($"{ctx.Member.Nickname}... {member.Nickname} recusou sua proposta / o tempo expirou...");
+                subjectOfMessage = TextSingleton.GetMemberGerenciator(ctx.Member).DealDeclined();
             }
+
+            await ctx.Channel.SendMessageAsync
+            (
+                $"{ctx.Member.Nickname}... {member.Nickname} {subjectOfMessage}"
+            );
+        }
+
+
+        protected String OrganizeMessageContent(String[] dataList, DiscordMember member)
+        {
+            String messageContent = TextSingleton.GetMemberGerenciator(member).DealMessageTemplate();
+
+            var regex = new Regex(Regex.Escape("@"));
+            foreach (String data in dataList)
+            {
+                messageContent = regex.Replace(messageContent, data, 1);
+            }
+
+            return messageContent;
         }
 
 

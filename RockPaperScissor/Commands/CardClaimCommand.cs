@@ -3,6 +3,7 @@ using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Interactivity.Extensions;
 using RockPaperScissor.Data;
 using RockPaperScissor.Util;
+using RockPaperScissor.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissor.Commands
 {
-    class CardClaimCommand : BaseCommandModule
+    class CardClaimCommand : MyBaseModule
     {
         Random rng = new Random();
 
@@ -22,13 +23,12 @@ namespace RockPaperScissor.Commands
         public async Task ClaimCard(CommandContext ctx)
         {
             if (TodayIsPremiated()) await PremiateMemberWithCard(ctx);
-            else await ctx.Channel.SendMessageAsync("Você não foi premiado hoje...");
+            else await ctx.Channel.SendMessageAsync(GetMessager(ctx).NotPremiated());
 
             await ctx.Channel.SendMessageAsync(
-             $"Você só podera pedir novamente em {AllGameData.TIME_TO_CLAIM_IN_SECONDS / 60} minutos"
+             $"{GetMessager(ctx).TellAboutCooldown()}: {AllGameData.TIME_TO_CLAIM_IN_SECONDS / 60}"
             );
         }
-
 
 
 
@@ -45,7 +45,7 @@ namespace RockPaperScissor.Commands
             int focusIndex = await RequestFocusFromMember(ctx);
             if (focusIndex == -1)
             {
-                await ctx.Channel.SendMessageAsync("Você cometeu um erro e por isso perdeu sua carta diária");
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).LostCardByError());
                 return;
             }
             Card newCard = CreateCard(ctx, focusIndex);
@@ -56,7 +56,7 @@ namespace RockPaperScissor.Commands
 
         private async Task<int> RequestFocusFromMember(CommandContext ctx)
         {
-            await ctx.Channel.SendMessageAsync("Pababéns! Hoje você foi premiado! Envie a seguinte mensagem para determinar o foco de sua carta: Impacto 'imp' / Precisão 'pre' / Encanto 'enc'");
+            await ctx.Channel.SendMessageAsync(GetMessager(ctx).ExplaningPremiation());
 
             var interativity = ctx.Client.GetInteractivity();
             var result = await interativity.WaitForMessageAsync(m => m.Channel == ctx.Channel && m.Author == ctx.User).ConfigureAwait(false);
@@ -151,17 +151,16 @@ namespace RockPaperScissor.Commands
 
         private String GetRandomName(int quantElements, int focus, int[] elementsDistribution)
         {
-            String name = CardsNameList.GetFirstName(focus, elementsDistribution) + " ";
-            name += CardsNameList.GetSecondName(quantElements);
+            String name = CardsNameList.GetAdjectiveName(quantElements) + " ";
+            name += CardsNameList.GetBaseName(focus, elementsDistribution);
             return name;
         }
 
 
         private void PrintNewCardInfo(CommandContext ctx, Card newCard)
         {
-            ctx.Channel.SendMessageAsync("**Carta Criada com Sucesso:** " + newCard.ToString());
+            ctx.Channel.SendMessageAsync($"**{GetMessager(ctx).SuccessfulCardCreation()}** \n" + newCard.ToString());
         }
-
 
 
     }

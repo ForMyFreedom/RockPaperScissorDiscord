@@ -3,6 +3,7 @@ using DSharpPlus.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using RockPaperScissor.Text;
 
 namespace RockPaperScissor.Data
 {
@@ -13,7 +14,9 @@ namespace RockPaperScissor.Data
         public const int DUEL_DECKS_LENGTH = 2;
         public const int MAX_CARDS_IN_DUEL_DECK = 10;
         public static ulong gameRoleID;
+
         static private List<Deck> allDecks;
+
 
 
         static public void StartNewData()
@@ -95,7 +98,6 @@ namespace RockPaperScissor.Data
         {
             return allDecks;
         }
-
 
     }
 }

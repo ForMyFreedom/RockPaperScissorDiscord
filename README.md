@@ -10,6 +10,7 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 - [ ] Implement the Duel Variations of Game and WinLoseConditions
 - [ ] Create the another three focus alocation
 - [ ] There is no logic in element when the card does not correspond to the chosen element. Advantage need to be re-write
+- [ ] Solve problems with private and server assumptions (There is no conection of an player and a server)
 
 ## DECTECTED BUGS
 - [x] When you make a trade which you dispense a card, the duel_deck won't remove it. It turns a ghost card!

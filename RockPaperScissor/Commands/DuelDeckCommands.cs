@@ -9,14 +9,14 @@ using System;
 
 namespace RockPaperScissor.Commands
 {
-    public class DuelDeckCommands : BaseCommandModule
+    public class DuelDeckCommands : MyBaseModule
     {
         [Command("create_duel_deck")]
         public async Task CreateDuelDeck(CommandContext ctx, int deckIndex, params int[] cardsListIndex)
         {
             if (!await CreateDuelDeckDataIsOk(ctx, deckIndex, cardsListIndex)) return;
             AllGameData.GetMemberDeck(ctx.User.Id).SetDuelDeck(deckIndex, cardsListIndex);
-            await ctx.Channel.SendMessageAsync($"O Deck {deckIndex} foi atualizado pelos valores {MyUtilities.GetArrayToString(cardsListIndex)}");
+            await ctx.Channel.SendMessageAsync(GetMessager(ctx).DuelDeckActualized());
         }
 
 
@@ -24,8 +24,8 @@ namespace RockPaperScissor.Commands
         [Command("duel_deck")]
         public async Task ShowDuelDeck(CommandContext ctx)
         {
-            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, ctx.User.Id)) return;
-            if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx.Channel)) return;
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return;
+            if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx)) return;
 
             for (int i = 0; i < AllGameData.DUEL_DECKS_LENGTH; i++)
             {
@@ -44,13 +44,13 @@ namespace RockPaperScissor.Commands
 
             if (deckIndex > AllGameData.DUEL_DECKS_LENGTH || deckIndex < 0)
             {
-                await ctx.Channel.SendMessageAsync("O index do deck está errado");
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).WrongDeckIndex());
                 return false;
             }
 
             if (cardsListIndex.Length > AllGameData.MAX_CARDS_IN_DUEL_DECK)
             {
-                await ctx.Channel.SendMessageAsync("Você colocou mais cartas que o permitido");
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).MoreCardsThatIsPermitted());
                 return false;
             }
 
@@ -58,7 +58,7 @@ namespace RockPaperScissor.Commands
             {
                 if (AllGameData.GetMemberDeck(ctx.User.Id).GetCardById(index) == null)
                 {
-                    await ctx.Channel.SendMessageAsync("O Index das Cartas dadas está inválido");
+                    await ctx.Channel.SendMessageAsync(GetMessager(ctx).InvalidCardId());
                     return false;
                 }
             }
