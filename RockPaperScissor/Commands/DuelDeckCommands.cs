@@ -3,6 +3,9 @@ using DSharpPlus.CommandsNext.Attributes;
 using RockPaperScissor.Data;
 using RockPaperScissor.Util;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
+using System;
 
 namespace RockPaperScissor.Commands
 {
@@ -58,15 +61,13 @@ namespace RockPaperScissor.Commands
                     await ctx.Channel.SendMessageAsync("O Index das Cartas dadas está inválido");
                     return false;
                 }
-            
-                foreach(int secondIndex in cardsListIndex)
-                {
-                    if (index == secondIndex)
-                    {
-                        await ctx.Channel.SendMessageAsync("Você não pode repetir cartas");
-                        return false;
-                    }
-                }
+            }
+
+            List<int> list = cardsListIndex.ToList();
+            if(! list.TrueForAll(s => list.FindAll(g => g == s).Count == 1))
+            {
+                await ctx.Channel.SendMessageAsync("Você não pode repetir cartas");
+                return false;
             }
 
             return true;
