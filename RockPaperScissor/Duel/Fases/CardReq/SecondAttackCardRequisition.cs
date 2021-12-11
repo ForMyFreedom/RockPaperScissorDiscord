@@ -59,14 +59,35 @@ namespace RockPaperScissor.Duel.Fases.CardReq
         }
 
 
+        protected override String GetCurretDuelDeck()
+        {
+            return MyUtilities.GetDuelDeckCardsString(
+                GetCurrentPlayer().Id,
+                duelStatus.GetDuelDeckIndexList()[GetCurrentPlayerIndex()],
+                GetAllCardsLessAttackFront()
+            );
+        }
 
+        private int[] GetAllCardsLessAttackFront()
+        {
+            List<int> duelDeck = duelStatus.GetDecks()[GetCurrentPlayerIndex()].GetDuelDeck(
+                    duelStatus.GetDuelDeckIndexList()[GetCurrentPlayerIndex()]);
 
+            List<int> notAttackFront = new List<int>();
 
+            foreach(int cardId in duelDeck)
+            {
+                if (! duelStatus.GetAttackFront().Contains(cardId))
+                    notAttackFront.Add(cardId);
+            }
+
+            return notAttackFront.ToArray();
+        }
 
 
         protected override bool NeedToMarkCardAsUsed()
         {
-            throw new NotImplementedException();
+            return true;
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using RockPaperScissor.Data;
 using DSharpPlus.Entities;
 
 namespace RockPaperScissor.Duel
@@ -11,6 +12,7 @@ namespace RockPaperScissor.Duel
     {
         //game regulation
         private DiscordMember[] combatents;
+        private Deck[] decks;
         private int quantOfCards;
         private bool gameContinue;
         public int[] amountOfErrorsFromPlayers;
@@ -31,6 +33,9 @@ namespace RockPaperScissor.Duel
         private int[] quantOfVictoryPoints;
         private int gameWinnerIndex;
         private int turnWinnerIndex;
+        private int premiumCoins;
+
+        private WinLoseCondition winLoseCondition;
 
 
 
@@ -38,6 +43,7 @@ namespace RockPaperScissor.Duel
         public DuelStatus(String strParam)
         {
             combatents = new DiscordMember[2];
+            decks = new Deck[2];
             gameContinue = true;
             amountOfErrorsFromPlayers = new[] { 0, 0 };
             duelDeckIndexFromDuelists = new[] { 0, 0 };
@@ -49,18 +55,25 @@ namespace RockPaperScissor.Duel
         }
 
 
+        public async Task PlayWinLoseConditions()
+        {
+            await winLoseCondition.PlayConditions(GetCombatents()[gameWinnerIndex], GetCombatents()[1-gameWinnerIndex]);
+        }
+
 
 
         public void GetStatusFromStrParam(String strParam)
         {
             //@implement the variations
-            quantOfCards = 3;
+            quantOfCards = 4;
+            premiumCoins = 20;
+            winLoseCondition = new BlankWinLoseCondition();
         }
 
         public String GetStyleToString()
         {
             //@implement the variations
-            return "Quantidade de Cartas: 3";
+            return $"Quantidade de Cartas: {quantOfCards}";
         }
 
 
@@ -83,6 +96,13 @@ namespace RockPaperScissor.Duel
         public void SetOneCombatent(int id, DiscordMember dm)
         {
             combatents[id] = dm;
+            decks[id] = AllGameData.GetMemberDeck(dm);
+        }
+
+
+        public Deck[] GetDecks()
+        {
+            return decks;
         }
 
 
@@ -258,6 +278,14 @@ namespace RockPaperScissor.Duel
             gameWinnerIndex = _gameWinnerIndex;
         }
 
+        public void SetPremiumCoins(int coins)
+        {
+            premiumCoins = coins;
+        }
 
+        public int GetPremiumCoins()
+        {
+            return premiumCoins;
+        }
     }
 }
