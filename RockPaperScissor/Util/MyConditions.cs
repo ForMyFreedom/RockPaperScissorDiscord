@@ -1,4 +1,5 @@
 ﻿using DSharpPlus.Entities;
+using System.Collections.Generic;
 using RockPaperScissor.Data;
 using RockPaperScissor.Duel;
 
@@ -6,6 +7,19 @@ namespace RockPaperScissor.Util
 {
     public class MyConditions
     {
+        public static bool CardInADuelDeck(DiscordMember member, int cardID)
+        {
+            foreach (List<int> duelDeck in AllGameData.GetMemberDeck(member).GetAllDuelDecks())
+            {
+                foreach(int id in duelDeck)
+                {
+                    if (id == cardID)
+                        return true;
+                }
+            }
+            return false;
+        }
+
         public static bool PlayerIsCardMaster(DiscordMember member)
         {
             return AllGameData.GetMemberDeck(member) != null;

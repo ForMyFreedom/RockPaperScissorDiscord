@@ -58,6 +58,15 @@ namespace RockPaperScissor.Commands
                     await ctx.Channel.SendMessageAsync("O Index das Cartas dadas está inválido");
                     return false;
                 }
+            
+                foreach(int secondIndex in cardsListIndex)
+                {
+                    if (index == secondIndex)
+                    {
+                        await ctx.Channel.SendMessageAsync("Você não pode repetir cartas");
+                        return false;
+                    }
+                }
             }
 
             return true;

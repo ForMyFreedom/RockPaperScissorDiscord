@@ -51,19 +51,12 @@ namespace RockPaperScissor.Commands
 
         private async Task<bool> StartGameConditionsAreOk(CommandContext ctx, DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
         {
-            if (! await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, member))  return false;
-
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, member))  return false;
             if (!await ConditionsDiscordInterface.IsAdequatedDuelDeckToTheGameStyle(ctx.Channel, ctx.Member, duelDeckIndex, duelStatus)) return false;
-
-            /**
-            if ()
-            {
-                await ctx.Channel.SendMessageAsync("");
-                return false;
-            }
-            **/
-
-
+            if (!await ConditionsDiscordInterface.PlayerHasTheCoins(ctx.Channel, ctx.Member, duelStatus.GetPremiumCoins())) return false;
+            if (!await ConditionsDiscordInterface.PlayerHasTheCoins(ctx.Channel, member, duelStatus.GetPremiumCoins())) return false;
+            if (!await ConditionsDiscordInterface.IsNotTheSameMember(ctx.Channel, ctx.Member, member)) return false;
+            
             return true;
         }
 
