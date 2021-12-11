@@ -30,7 +30,7 @@ namespace RockPaperScissor.Market
 
             if (!EntryDataConditionsIsOk(ctx, member, firstInt, secondInt))
             {
-                await ctx.Channel.SendMessageAsync("Você/ele não possui o que você diz ter...");
+                await ctx.Channel.SendMessageAsync("Você pode ter cometido um erro ou a carta referênciada esta bloqueada para venda");
                 return false;
             }
 

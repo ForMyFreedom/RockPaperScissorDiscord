@@ -8,7 +8,7 @@ namespace RockPaperScissor.Data
 {
     class AllGameData
     {
-        public const String NAME_OF_ROLE = "Guerreiro das Cartas";
+        public const String NAME_OF_ROLE = "Warrior of the Cards";
         public const int TIME_TO_CLAIM_IN_SECONDS = 1800;
         public const int DUEL_DECKS_LENGTH = 2;
         public const int MAX_CARDS_IN_DUEL_DECK = 10;
@@ -83,10 +83,10 @@ namespace RockPaperScissor.Data
 
 
 
-        static public void MakeTransference(DiscordMember firstMember, DiscordMember secondMember, int coinsQuant)
+        static public void MakeTransference(DiscordMember payer, DiscordMember reciver, int coinsQuant)
         {
-            GetMemberDeck(firstMember).RemoveCoins(coinsQuant);
-            GetMemberDeck(secondMember).AddCoins(coinsQuant);
+            GetMemberDeck(payer).RemoveCoins(coinsQuant);
+            GetMemberDeck(reciver).AddCoins(coinsQuant);
         }
 
 

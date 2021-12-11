@@ -50,7 +50,7 @@ namespace RockPaperScissor.Duel.Fases.CardReq
 
 
 
-        protected String GetCurretDuelDeck()
+        protected virtual String GetCurretDuelDeck()
         {
             return MyUtilities.GetDuelDeckCardsString(
                 GetCurrentPlayer().Id,
@@ -79,10 +79,10 @@ namespace RockPaperScissor.Duel.Fases.CardReq
             foreach(int card in cards)
             {
                 if (duelStatus.GetUsedCardsIdFromDuelist()[GetCurrentPlayerIndex()].Contains(card))
-                    return false;
+                    return true;
             }
 
-            return true;
+            return false;
         }
 
 

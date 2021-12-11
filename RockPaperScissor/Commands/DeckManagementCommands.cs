@@ -58,8 +58,6 @@ namespace RockPaperScissor.Commands
 
 
 
-
-
         private async Task ShowCards(CommandContext ctx, ulong id)
         {
             if (AllGameData.GetMemberDeck(id) != null)
