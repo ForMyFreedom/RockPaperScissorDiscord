@@ -76,6 +76,7 @@ namespace RockPaperScissor.Duel
 
         private async Task DoResolutionOfGame()
         {
+            StopDuelistDuelInDecks();
             int winnerId = duelStatus.GetGameWinnerIndex();
             if (winnerId == -1)
                 await PlayDrawn();
@@ -263,6 +264,15 @@ namespace RockPaperScissor.Duel
             int coins = duelStatus.GetPremiumCoins();
             await ctx.Channel.SendMessageAsync($"O Duelista vencedor recebe {coins}ℳ, ao passo que o perdedor perde {coins}ℳ");
             AllGameData.MakeTransference(duelStatus.GetCombatents()[1 - id], duelStatus.GetCombatents()[id], duelStatus.GetPremiumCoins());
+        }
+    
+
+        private void StopDuelistDuelInDecks()
+        {
+            foreach (DiscordMember combatent in duelStatus.GetCombatents())
+            { 
+                AllGameData.GetMemberDeck(combatent).SetDueling(false);
+            }
         }
     }
 }

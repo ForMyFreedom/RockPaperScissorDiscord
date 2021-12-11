@@ -59,5 +59,10 @@ namespace RockPaperScissor.Util
         {
             return duelStatus.GetQuantOfCards() == AllGameData.GetMemberDeck(member).GetDuelDeck(duelDeckIndex).ToArray().Length;
         }
+
+        public static bool IsNotDueling(DiscordUser user)
+        {
+            return ! AllGameData.GetMemberDeck(user.Id).GetDueling();
+        }
     }
 }

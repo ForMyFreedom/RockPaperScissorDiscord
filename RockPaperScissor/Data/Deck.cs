@@ -10,6 +10,7 @@ namespace RockPaperScissor.Data
         ulong ownerID;
         int idCounter = 0;
         int coinsQuant;
+        bool isDueling = false;
         List<List<int>> duelDecksList;
 
 
@@ -135,6 +136,16 @@ namespace RockPaperScissor.Data
         public void PlusIdCounter()
         {
             idCounter++;
+        }
+
+        public void SetDueling(bool b)
+        {
+            isDueling = b;
+        }
+
+        public bool GetDueling()
+        {
+            return isDueling;
         }
 
     }

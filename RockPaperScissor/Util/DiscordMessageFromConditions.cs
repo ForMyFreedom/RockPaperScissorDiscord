@@ -81,5 +81,15 @@ namespace RockPaperScissor.Util
                 return false;
             }
         }
+
+        public static async Task<bool> IsNotDueling(DiscordChannel channel, DiscordUser user)
+        {
+            if (MyConditions.IsNotDueling(user)) return true;
+            else
+            {
+                await channel.SendMessageAsync("Voce não pode usar essa ação enquanto duelar!");
+                return false;
+            }
+        }
     }
 }

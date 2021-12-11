@@ -43,6 +43,8 @@ namespace RockPaperScissor.Commands
                 Console.WriteLine(e.Message);
             }
 
+            
+
             await DeterminePresence(ctx, duelStatus);
         }
 
@@ -99,11 +101,20 @@ namespace RockPaperScissor.Commands
             if (duelStatus.GetGameContinue())
             {
                 GameDuel gameDuel = new GameDuel(ctx, duelStatus);
+                RegisterDuelInDecks(duelStatus);
                 await gameDuel.StartGameDuel();
             }
             else
             {
                 await ctx.Channel.SendMessageAsync("Infelizmente, o Duelo foi cancelado...");
+            }
+        }
+
+        private void RegisterDuelInDecks(DuelStatus duelStatus)
+        {
+            foreach(DiscordMember combatent in duelStatus.GetCombatents())
+            {
+                AllGameData.GetMemberDeck(combatent).SetDueling(true);
             }
         }
 
