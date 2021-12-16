@@ -12,7 +12,7 @@ using RockPaperScissor.Util;
 
 namespace RockPaperScissor.Commands
 {
-    public class BattleCommands : BaseCommandModule
+    public class BattleCommands : Util.MyBaseModule
     {
 
         [Command("make_duel")]
@@ -34,7 +34,7 @@ namespace RockPaperScissor.Commands
             duelStatus.SetDuelDeckIndex(0, duelDeckIndex);
             duelStatus.SetOneCombatent(0, ctx.Member);
 
-            await ctx.Channel.SendMessageAsync("Proposta de Duelo enviada!");
+            await ctx.Channel.SendMessageAsync(GetMessager(ctx).DuelProposalSent());
             try
             {
                 duelStatus = await WaitForChallengedMemberResponse(ctx, member, duelStatus);
@@ -53,11 +53,11 @@ namespace RockPaperScissor.Commands
 
         private async Task<bool> StartGameConditionsAreOk(CommandContext ctx, DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
         {
-            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, member))  return false;
-            if (!await ConditionsDiscordInterface.IsAdequatedDuelDeckToTheGameStyle(ctx.Channel, ctx.Member, duelDeckIndex, duelStatus)) return false;
-            if (!await ConditionsDiscordInterface.PlayerHasTheCoins(ctx.Channel, ctx.Member, duelStatus.GetPremiumCoins())) return false;
-            if (!await ConditionsDiscordInterface.PlayerHasTheCoins(ctx.Channel, member, duelStatus.GetPremiumCoins())) return false;
-            if (!await ConditionsDiscordInterface.IsNotTheSameMember(ctx.Channel, ctx.Member, member)) return false;
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, member))  return false;
+            if (!await ConditionsDiscordInterface.IsAdequatedDuelDeckToTheGameStyle(ctx, ctx.Member, duelDeckIndex, duelStatus)) return false;
+            if (!await ConditionsDiscordInterface.PlayerHasTheCoins(ctx, ctx.Member, duelStatus.GetPremiumCoins())) return false;
+            if (!await ConditionsDiscordInterface.PlayerHasTheCoins(ctx, member, duelStatus.GetPremiumCoins())) return false;
+            if (!await ConditionsDiscordInterface.IsNotTheSameMember(ctx, ctx.Member, member)) return false;
             
             return true;
         }
@@ -65,9 +65,10 @@ namespace RockPaperScissor.Commands
 
         private async Task<DuelStatus> WaitForChallengedMemberResponse(CommandContext ctx, DiscordMember member, DuelStatus duelStatus)
         {
-            await member.SendMessageAsync($"O Duelista '{ctx.Member.Nickname}' o convoca para um duelo com o seguinte formato:");
+            await member.SendMessageAsync(GetMessager(ctx).YouAreConvoke() + $"'{ctx.Member.Nickname}'");
+            await member.SendMessageAsync(GetMessager(ctx).DuelFollowsFormat());
             await member.SendMessageAsync(duelStatus.GetStyleToString());
-            DiscordMessage message = await member.SendMessageAsync("Responda (literalmente) essa mensagem com o Index de seu Deck de Duelo escolhido caso deseje batalhar");
+            DiscordMessage message = await member.SendMessageAsync(GetMessager(ctx).RequestConfirmationOfDuel());
 
 
             var interativity = ctx.Client.GetInteractivity();
@@ -81,7 +82,7 @@ namespace RockPaperScissor.Commands
             if (
                 MyUtilities.TryParse(response) &&
                 await ConditionsDiscordInterface.IsAdequatedDuelDeckToTheGameStyle(
-                    ctx.Channel, member, int.Parse(response), duelStatus)
+                    ctx, member, int.Parse(response), duelStatus)
                 )
             {
                 duelStatus.SetDuelDeckIndex(1, int.Parse(response));
@@ -106,7 +107,7 @@ namespace RockPaperScissor.Commands
             }
             else
             {
-                await ctx.Channel.SendMessageAsync("Infelizmente, o Duelo foi cancelado...");
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).DuelCanceled());
             }
         }
 

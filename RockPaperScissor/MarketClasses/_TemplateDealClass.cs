@@ -15,7 +15,7 @@ namespace RockPaperScissor.Market
         {
             if (!await ConditionsAreOk(ctx, member, firstInt, secondInt)) return;
 
-            await ctx.Channel.SendMessageAsync(TextSingleton.GetMemberGerenciator(ctx.Member).DealSent());
+            await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).DealSent());
             bool proposeAcepted = await SendOfferToSecond(ctx, member, firstInt, secondInt);
 
             await ConsidereResultOfDeal(proposeAcepted, ctx, member, firstInt, secondInt);
@@ -32,7 +32,7 @@ namespace RockPaperScissor.Market
 
             if (!EntryDataConditionsIsOk(ctx, member, firstInt, secondInt))
             {
-                await ctx.Channel.SendMessageAsync("Você pode ter cometido um erro ou a carta referênciada esta bloqueada para venda");
+                await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).ChooseWrongIndexOrBlockedCard());
                 return false;
             }
 
@@ -44,7 +44,7 @@ namespace RockPaperScissor.Market
         {
             String messageContent = GetDealMessageContent(ctx, member, firstCardID, secondCardID);
             await member.SendMessageAsync(messageContent);
-            var message = await member.SendMessageAsync($"\n **{TextSingleton.GetMemberGerenciator(ctx.Member).EmojiDealReaction()}**");
+            var message = await member.SendMessageAsync($"\n **{MyUtilities.GetMessager(ctx).EmojiDealReaction()}**");
 
             var result = await message.WaitForReactionAsync(member);
             if (!result.TimedOut) return true;
@@ -58,31 +58,17 @@ namespace RockPaperScissor.Market
             if (proposeAcepted)
             {
                 MakeTheDeal(ctx.Member, member, firstInt, secondInt);
-                subjectOfMessage = TextSingleton.GetMemberGerenciator(ctx.Member).DealAccepted();
+                subjectOfMessage = MyUtilities.GetMessager(ctx).DealAccepted();
             }
             else
             {
-                subjectOfMessage = TextSingleton.GetMemberGerenciator(ctx.Member).DealDeclined();
+                subjectOfMessage = MyUtilities.GetMessager(ctx).DealDeclined();
             }
 
             await ctx.Channel.SendMessageAsync
             (
                 $"{ctx.Member.Nickname}... {member.Nickname} {subjectOfMessage}"
             );
-        }
-
-
-        protected String OrganizeMessageContent(String[] dataList, DiscordMember member)
-        {
-            String messageContent = TextSingleton.GetMemberGerenciator(member).DealMessageTemplate();
-
-            var regex = new Regex(Regex.Escape("@"));
-            foreach (String data in dataList)
-            {
-                messageContent = regex.Replace(messageContent, data, 1);
-            }
-
-            return messageContent;
         }
 
 

@@ -10,6 +10,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using RockPaperScissor.Data;
 using RockPaperScissor.Util;
+using RockPaperScissor.Text;
 using RockPaperScissor.Duel.Fases;
 
 namespace RockPaperScissor.Duel
@@ -43,18 +44,18 @@ namespace RockPaperScissor.Duel
             duelStatus.SetGameContinue(true);
             duelStatus.SetAttackPlayerIndex(SortInitialAttackPlayer());
 
-            await ctx.Channel.SendMessageAsync($"**O DUELO SE INICIA!**");
+            await ctx.Channel.SendMessageAsync($"**{MyUtilities.GetMessager(ctx).DuelStart()}**");
 
             do
             {
-                await ctx.Channel.SendMessageAsync($"{duelStatus.GetAttackPlayer().Mention} esta no Ataque!");
+                await ctx.Channel.SendMessageAsync($"{duelStatus.GetAttackPlayer().Mention}"+ MyUtilities.GetMessager(ctx).IsInTheAttack());
                 await firstAttackFase.DoTheFase();
                 await defenseFase.DoTheFase();
                 await secondAttackFase.DoTheFase();
                 await DoResolutionOfTurn();
             } while (duelStatus.GetGameContinue());
 
-            await ctx.Channel.SendMessageAsync("**O DUELO ENCONTRA SEU FIM!**");
+            await ctx.Channel.SendMessageAsync($"**{MyUtilities.GetMessager(ctx).DuelEnd()}**");
             await DoResolutionOfGame();
         }
 
@@ -87,8 +88,7 @@ namespace RockPaperScissor.Duel
 
         private async Task PlayDrawn()
         {
-            await ctx.Channel.SendMessageAsync("O Duelo acabou em empate, e com isso," +
-                "nenhum dos lados ganham ou perdem...");
+            await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).DuelWasDraw());
         }
 
         private async Task PlayWin(int winnerId)
@@ -171,13 +171,13 @@ namespace RockPaperScissor.Duel
             String winnerName = duelStatus.GetCombatents()[duelStatus.GetTurnWinnerIndex()].Nickname;
             String elementalStringAdvantage = GetStringAdvantage(elementalBonus);
             
-            await ctx.Channel.SendMessageAsync($"`{GetAttackCardName()}` ataca `{GetDefenseCardName()}`...");
+            await ctx.Channel.SendMessageAsync($"`{GetAttackCardName()}` vs `{GetDefenseCardName()}`...");
             await Task.Delay(2000);
             await ctx.Channel.SendMessageAsync($"**{elementalStringAdvantage}**");
             await Task.Delay(2000);
             await ctx.Channel.SendMessageAsync(GetWinText());
             await Task.Delay(1000);
-            await ctx.Channel.SendMessageAsync($"Parabens, { winnerName}. Você venceu esse turno com { Math.Abs(winDif)} pontos a mais {GetZeroExplanation(winDif)}");
+            await ctx.Channel.SendMessageAsync($"Parabens, {winnerName}. Você venceu esse turno com { Math.Abs(winDif)} pontos a mais"); //@
             await Task.Delay(2000);
         }
 
@@ -185,17 +185,12 @@ namespace RockPaperScissor.Duel
         {
             String str = $"*{MyUtilities.GetElementalName(duelStatus.GetAttackElement())}*" +
                 $" vs *{MyUtilities.GetElementalName(duelStatus.GetDefenseElement())}* ";
-            if (elementalBonus > 0)  str += "[Ataque com vantagem]";
-            if (elementalBonus < 0)  str += "[Ataque com desvantagem]";
-            if (elementalBonus == 0) str += "[Sem vantagem]";
+            if (elementalBonus > 0)  str += "[ATK↑]";
+            if (elementalBonus < 0)  str += "[DEF↑]";
+            if (elementalBonus == 0) str += "[---]";
             return str;
         }
 
-        private string GetZeroExplanation(int winDiferrence)
-        {
-            if (winDiferrence == 0) return "[Ataque ganha no empate]";
-            return "";
-        }
 
         private string GetAttackCardName()
         {
@@ -212,9 +207,9 @@ namespace RockPaperScissor.Duel
         private string GetWinText()
         {
             if(duelStatus.GetTurnWinnerIndex() == duelStatus.GetAttackPlayerIndex())
-                return "Porem o ataque venceu!";
+                return "Porem o ataque venceu!"; //@
             else
-                return "E a defesa venceu!";
+                return "E a defesa venceu!";    //@
         }
 
 
@@ -251,7 +246,7 @@ namespace RockPaperScissor.Duel
 
         private async Task CongratWinner(int winnerIndex)
         {
-            await ctx.Channel.SendMessageAsync(
+            await ctx.Channel.SendMessageAsync( //@
                 $"Parabêns, {duelStatus.GetCombatents()[winnerIndex].Mention}, voce venceu " +
                 $"esse duelo contra {duelStatus.GetCombatents()[1-winnerIndex].Mention} com " +
                 $"incrível maestria"
@@ -262,7 +257,7 @@ namespace RockPaperScissor.Duel
         private async Task GiveBasicProfitsAndLosses(int id)
         {
             int coins = duelStatus.GetPremiumCoins();
-            await ctx.Channel.SendMessageAsync($"O Duelista vencedor recebe {coins}ℳ, ao passo que o perdedor perde {coins}ℳ");
+            await ctx.Channel.SendMessageAsync($"O Duelista vencedor recebe {coins}ℳ, ao passo que o perdedor perde {coins}ℳ"); //@
             AllGameData.MakeTransference(duelStatus.GetCombatents()[1 - id], duelStatus.GetCombatents()[id], duelStatus.GetPremiumCoins());
         }
     

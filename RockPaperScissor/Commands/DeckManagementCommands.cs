@@ -28,7 +28,7 @@ namespace RockPaperScissor.Commands
         [RequireGuild]
         public async Task CreateDeckCommand(CommandContext ctx)
         {
-            await CreateNewDeck(ctx, ctx.User.Id);
+            await CreateNewDeck(ctx);
         }
 
 
@@ -67,11 +67,15 @@ namespace RockPaperScissor.Commands
 
 
 
-        private async Task CreateNewDeck(CommandContext ctx, ulong id)
+        private async Task CreateNewDeck(CommandContext ctx)
         {
-            AllGameData.CreateAndAddNewDeck(id);
-            DiscordMember member = await ctx.Guild.GetMemberAsync(id);
-            await member.GrantRoleAsync(ctx.Guild.GetRole(AllGameData.gameRoleID));
+            if (AllGameData.GetMemberDeck(ctx.Member) != null)
+            {
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).CantCreateAnotherDeck());
+                return;
+            }
+            AllGameData.CreateAndAddNewDeck(ctx.Member.Id);
+            await ctx.Member.GrantRoleAsync(ctx.Guild.GetRole(AllGameData.gameRoleID));
             await ctx.Channel.SendMessageAsync(GetMessager(ctx).DeckCreatedSuccessfully());
         }
 

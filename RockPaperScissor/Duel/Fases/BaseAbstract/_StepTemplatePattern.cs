@@ -45,13 +45,13 @@ namespace RockPaperScissor.Duel.Fases.BaseAbstract
 
             if (duelStatus.amountOfErrorsFromPlayers[currentPlayerIndex] == 2)
             {
-                await ctx.Channel.SendMessageAsync("Você perdeu o duelo por exesso de erros");
+                await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).YouLostByTooMuchErrors());
                 duelStatus.SetGameContinue(false);
                 duelStatus.SetGameWinnerIndex(1 - currentPlayerIndex);
                 return;
             }
 
-            await ctx.Channel.SendMessageAsync("Você tem mais uma chance antes de perder o duelo...");
+            await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).OneMoreChanceBeforeLostTheDuel());
         }
     }
 }

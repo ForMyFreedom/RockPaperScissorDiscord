@@ -40,6 +40,21 @@ namespace RockPaperScissor.Text
         public abstract String DuelDeckActualized();
         public abstract String WrongDeckIndex();
         public abstract String MoreCardsThatIsPermitted();
-
+        public abstract String CantCreateAnotherDeck();
+        public abstract String DuelCanceled(); //"Infelizmente, o Duelo foi cancelado..."
+        public abstract String DuelProposalSent(); //"Proposta de Duelo enviada!"
+        public abstract String YouAreConvoke(); //"Você é convocado para um duelo pelo duelista: "
+        public abstract String DuelFollowsFormat();//"O Duelo segue o seguinte formato:"
+        public abstract String RequestConfirmationOfDuel();//"Responda (literalmente) essa mensagem com o Index de seu Deck de Duelo escolhido caso deseje batalhar"
+        public abstract String YouCantRepeatCard();//"Você não pode repetir cartas"
+        public abstract String DuelDeckWithIncorretFormat();//"O Deck de Duelo não está adequado ao formato do duelo"
+        public abstract String CantUseActionWhileDueling();//"Voce não pode usar essa ação enquanto duelar!"
+        public abstract String ChooseWrongIndexOrBlockedCard();//"Você pode ter cometido um erro ou a carta referênciada esta bloqueada para venda"
+        public abstract String DuelStart();//"O DUELO SE INICIA!"
+        public abstract String DuelEnd();//"O DUELO ENCONTRA SEU FIM!"
+        public abstract String IsInTheAttack();//esta no Ataque!
+        public abstract String DuelWasDraw();//"O Duelo acabou em empate, e com isso, nenhum dos lados ganham ou perdem..."
+        public abstract String YouLostByTooMuchErrors();//"Você perdeu o duelo por exesso de erros"
+        public abstract String OneMoreChanceBeforeLostTheDuel();//"Você tem mais uma chance antes de perder o duelo..."
     }
 }

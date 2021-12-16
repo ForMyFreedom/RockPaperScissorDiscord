@@ -38,10 +38,10 @@ namespace RockPaperScissor.Commands
 
         private async Task<bool> CreateDuelDeckDataIsOk(CommandContext ctx, int deckIndex, int[] cardsListIndex)
         {
-            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx.Channel, ctx.User.Id)) return false;
-            if (!await ConditionsDiscordInterface.IsNotDueling(ctx.Channel, ctx.User)) return false;
-            if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx.Channel)) return false;
-
+            if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return false;
+            if (!await ConditionsDiscordInterface.IsNotDueling(ctx, ctx.User)) return false;
+            if (!await ConditionsDiscordInterface.ChannelIsPrivate(ctx)) return false;
+            
             if (deckIndex > AllGameData.DUEL_DECKS_LENGTH || deckIndex < 0)
             {
                 await ctx.Channel.SendMessageAsync(GetMessager(ctx).WrongDeckIndex());
@@ -66,7 +66,7 @@ namespace RockPaperScissor.Commands
             List<int> list = cardsListIndex.ToList();
             if(! list.TrueForAll(s => list.FindAll(g => g == s).Count == 1))
             {
-                await ctx.Channel.SendMessageAsync("Você não pode repetir cartas");
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).YouCantRepeatCard());
                 return false;
             }
 

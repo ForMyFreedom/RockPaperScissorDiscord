@@ -164,5 +164,83 @@ namespace RockPaperScissor.Text
             return "Você colocou mais cartas que o permitido";
         }
 
+        public override string CantCreateAnotherDeck()
+        {
+            return "Você não pode criar outro deck";
+        }
+        public override string DuelCanceled()
+        {
+            return "Infelizmente, o Duelo foi cancelado...";
+        }
+
+        public override string DuelProposalSent()
+        {
+            return "Proposta de Duelo enviada!";
+        }
+
+        public override string YouAreConvoke()
+        {
+            return "Você é convocado para um duelo pelo duelista: ";
+        }
+
+        public override string DuelFollowsFormat()
+        {
+            return "O Duelo segue o seguinte formato:";
+        }
+
+        public override string RequestConfirmationOfDuel()
+        {
+            return "Responda (literalmente) essa mensagem com o Index de seu Deck de Duelo escolhido caso deseje batalhar";
+        }
+
+        public override string YouCantRepeatCard()
+        {
+            return "Você não pode repetir cartas";
+        }
+
+        public override string DuelDeckWithIncorretFormat()
+        {
+            return "O Deck de Duelo não está adequado ao formato do duelo";
+        }
+
+        public override string CantUseActionWhileDueling()
+        {
+            return "Voce não pode usar essa ação enquanto duelar!";
+        }
+
+        public override string ChooseWrongIndexOrBlockedCard()
+        {
+            return "Você pode ter cometido um erro ou a carta referênciada esta bloqueada para negócios";
+        }
+
+        public override string DuelStart()
+        {
+            return "O DUELO SE INICIA!";
+        }
+
+        public override string DuelEnd()
+        {
+            return "O DUELO ENCONTRA SEU FIM!";
+        }
+
+        public override string IsInTheAttack()
+        {
+            return "esta no Ataque!";
+        }
+
+        public override string DuelWasDraw()
+        {
+            return "O Duelo acabou em empate, e com isso, nenhum dos lados ganham ou perdem...";
+        }
+
+        public override string YouLostByTooMuchErrors()
+        {
+            return "Você perdeu o duelo por exesso de erros";
+        }
+
+        public override string OneMoreChanceBeforeLostTheDuel()
+        {
+            return "Você tem mais uma chance antes de perder o duelo...";
+        }
     }
 }

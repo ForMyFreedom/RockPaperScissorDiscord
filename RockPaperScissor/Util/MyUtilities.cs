@@ -1,8 +1,10 @@
 ﻿using DSharpPlus;
+using DSharpPlus.CommandsNext;
 using RockPaperScissor.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using RockPaperScissor.Text;
 
 namespace RockPaperScissor.Util
@@ -105,6 +107,25 @@ namespace RockPaperScissor.Util
             }
             return "";
         }
+
+        public static TextMessagesGerenciator GetMessager(CommandContext ctx)
+        {
+            return TextSingleton.GetMemberGerenciator(ctx.Member);
+        }
+
+        public static String GetFormatText(String baseMessage, object[] data)
+        {
+            Regex regex = new Regex(Regex.Escape("@"));
+            String message = baseMessage;
+
+            foreach(object obj in data)
+            {
+                message = regex.Replace(message, obj.ToString(), 1);
+            }
+
+            return message;
+        }
+
 
 
         /* @With a more stable server...

@@ -163,7 +163,84 @@ namespace RockPaperScissor.Text
             return "You put more cards than is permitted";
         }
 
+        public override string CantCreateAnotherDeck()
+        {
+            return "You can't create another deck";
+        }
 
+        public override string DuelCanceled()
+        {
+            return "Unfortunately, the Duel was cancelled...";
+        }
 
+        public override string DuelProposalSent()
+        {
+            return "Duel proposal submitted!";
+        }
+
+        public override string YouAreConvoke()
+        {
+            return "You are convoke to a duel by the duelist: ";
+        }
+
+        public override string DuelFollowsFormat()
+        {
+            return "The Duel follows the following format:";
+        }
+
+        public override string RequestConfirmationOfDuel()
+        {
+            return "Reply (literally) this message with the Index of your chosen Duel Deck if you want to battle";
+        }
+
+        public override string YouCantRepeatCard()
+        {
+            return "You cannot repeat cards";
+        }
+
+        public override string DuelDeckWithIncorretFormat()
+        {
+            return "Duel Deck is not suited to the duel format";
+        }
+
+        public override string CantUseActionWhileDueling()
+        {
+            return "You cannot use this action while dueling!";
+        }
+
+        public override string ChooseWrongIndexOrBlockedCard()
+        {
+            return "You may have made a mistake or the referenced a card that is blocked for deal";
+        }
+
+        public override string DuelStart()
+        {
+            return "DUEL STARTS!";
+        }
+
+        public override string DuelEnd()
+        {
+            return "THE DUEL COMES TO AN END!";
+        }
+
+        public override string IsInTheAttack()
+        {
+            return "it's on Attack!";
+        }
+
+        public override string DuelWasDraw()
+        {
+            return "The Duel ended in a draw, and with that, neither side wins or loses...";
+        }
+
+        public override string YouLostByTooMuchErrors()
+        {
+            return "You lost the duel due to errors";
+        }
+
+        public override string OneMoreChanceBeforeLostTheDuel()
+        {
+            return "You have one more chance before you lose the duel...";
+        }
     }
 }

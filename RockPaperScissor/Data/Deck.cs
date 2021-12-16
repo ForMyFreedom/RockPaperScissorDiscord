@@ -15,14 +15,16 @@ namespace RockPaperScissor.Data
         List<List<int>> duelDecksList;
 
 
-
         public Deck(ulong memberID)
         {//Create new Deck in game
             allCards = new List<Card>(30);
             CardCreator.GetStandartCardsToDeck(this);
             ownerID = memberID;
             coinsQuant = 50;
-            duelDecksList = new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH);
+            duelDecksList = new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH) {
+                new List<int>(AllGameData.MAX_CARDS_IN_DUEL_DECK),
+                new List<int>(AllGameData.MAX_CARDS_IN_DUEL_DECK)
+            };
             language = "en";
         }
 
@@ -150,7 +152,7 @@ namespace RockPaperScissor.Data
         public bool GetDueling()
         {
             return isDueling;
-
+        }
           
         public string GetLanguage()
         {

@@ -1,6 +1,7 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using RockPaperScissor.Data;
+using RockPaperScissor.Util;
 using System;
 
 namespace RockPaperScissor.Market
@@ -21,8 +22,8 @@ namespace RockPaperScissor.Market
         protected override string GetDealMessageContent(CommandContext ctx, DiscordMember member, int cardID, int coinsQuant)
         {
             String firstData = AllGameData.GetMemberDeck(member).GetCardById(cardID).ToString();
-            String secondData = coinsQuant.ToString();
-            return OrganizeMessageContent(new[] { firstData, secondData }, ctx.Member);
+            String secondData = coinsQuant.ToString()+"ℳ";
+            return MyUtilities.GetFormatText(MyUtilities.GetMessager(ctx).DealMessageTemplate(), new[] { ctx.Member.Nickname, firstData, secondData });
         }
 
 
