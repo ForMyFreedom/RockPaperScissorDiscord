@@ -17,22 +17,6 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 - [x] It is possible to create a duel_deck with repeated card index
 - [x] Is possible to change your duel_deck while the game is occurring
 
-## LINES TO SOLVE [REMEMBER OF THE METHOD 'GetFormatText' ON THE MY_UTILITIES]
-
-27
-DEFENSE_CARD_REQUISITION	ATTACK_CARD_REQUISITION	ATTACK_ELEMENT_REQUISITION
-DEFENSE_ELEMENT_REQUISITION	SECOND_ATTACK_CARD_REQUISITION
-
-37
-CARD
-
-76
-DUEL_STATUS
-
-210-212-249-260-180
-GAME-DUEL
-
-
 ---
 ---
 
