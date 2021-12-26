@@ -16,7 +16,7 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 - [x] When you make a trade which you dispense a card, the duel_deck won't remove it. It turns a ghost card!
 - [x] It is possible to create a duel_deck with repeated card index
 - [x] Is possible to change your duel_deck while the game is occurring
-- [ ] Players can just farm card with: 'create_deck', 'claim', 'sell by 0', 'del_deck', 'create_deck'... I think it should be solved with a timer to delete deck
+- [x] Players can just farm card with: 'create_deck', 'claim', 'sell by 0', 'del_deck', 'create_deck'... I think it should be solved with a timer to delete deck
 
 ---
 ---
