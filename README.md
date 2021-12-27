@@ -7,7 +7,6 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 
 ## CURRENT TO DO LIST
 - [ ] Implement the Duel
-- [ ] Create the another three focus alocation
 - [ ] Solve problems with private and server assumptions (There is no conection of an player and a server)
 - [ ] @
 
@@ -81,14 +80,6 @@ And finally, ever card you get that way will come with a Star value that represe
 91-98|★★★★|9|4%
 99-100|★★★★★|11|1%
 \* Considering the claim chance
-
-### Focus Allocation
-1d4|Type of Focus|Description
-:---: | :---: | :---:
-1|Mitigated Focus|Distribute equally the EP into the Elements
-2|Regulated Focus|Allocate half of the EP into the two Elements besides focus and then put the rest in the Focus
-3|Random Focus|Allocate the EP randomly
-4|Reforced Focus|Put all the EP in the Focus of the Card
 
 ---
 
