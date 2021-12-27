@@ -20,9 +20,8 @@ namespace RockPaperScissor.Duel.Fases
     {
         public FirstAttackFase(CommandContext ctx, DuelStatus duelStatus) : base(ctx, duelStatus)
         {
-            steps = new _StepTemplatePattern[2] {
+            steps = new _StepTemplatePattern[] {
                 new CardReq.AttackCardRequisition(ctx,duelStatus),
-                new ElementReq.AttackElementRequisition(ctx,duelStatus),
             };
         }
 

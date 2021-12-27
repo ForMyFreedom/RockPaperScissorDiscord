@@ -24,7 +24,7 @@ namespace RockPaperScissor.Duel.Fases.ElementReq
 
         protected override string GetRequestElementMessage()
         {
-            return $"Ainda no Atacante, escolha um elemento ('imp','pre','enc','pod') para ser seu Ataque";
+            return GetCurrentPlayer().Mention + " " + MyUtilities.GetMessager(GetCurrentPlayer()).ChooseAttackElement();
         }
 
         protected override void SetCurrentElement(int id)

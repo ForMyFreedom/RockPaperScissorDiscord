@@ -24,7 +24,7 @@ namespace RockPaperScissor.Duel.Fases.CardReq
 
         protected override string GetRequestCardMessage()
         {
-            return $"Escolha dois index de cartas de seu deck de duelo para serem seu Fronte de Ataque. Separadas com um espaço";
+            return MyUtilities.GetMessager(GetCurrentPlayer()).ChooseAAttackFront();
         }
 
         protected override bool NeedToMarkCardAsUsed()
@@ -53,10 +53,6 @@ namespace RockPaperScissor.Duel.Fases.CardReq
             }
             return false;
         }
-
-
-
-
 
 
     }

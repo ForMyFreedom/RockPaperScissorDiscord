@@ -25,7 +25,7 @@ namespace RockPaperScissor.Duel.Fases.CardReq
         protected override string GetRequestCardMessage()
         {
             int[] attackFront = duelStatus.GetAttackFront();
-            return $"Por fim, Jogador de Ataque, qual carta de seus dois frontes de ataque deseja usar ({attackFront[0]},{attackFront[1]})?";
+            return GetCurrentPlayer().Mention + " " + MyUtilities.GetMessager(GetCurrentPlayer()).ChooseDefinitiveAttackIndex() + $": ({attackFront[0]},{attackFront[1]})";
         }
 
         protected override String GetSeparationRule()

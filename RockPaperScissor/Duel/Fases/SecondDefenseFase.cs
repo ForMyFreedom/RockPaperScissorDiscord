@@ -14,12 +14,11 @@ using RockPaperScissor.Duel.Fases.BaseAbstract;
 
 namespace RockPaperScissor.Duel.Fases
 {
-    public class DefenseFase : _FaseTemplatePattern
+    public class SecondDefenseFase : _FaseTemplatePattern
     {
-        public DefenseFase(CommandContext ctx, DuelStatus duelStatus) : base(ctx, duelStatus)
+        public SecondDefenseFase(CommandContext ctx, DuelStatus duelStatus) : base(ctx, duelStatus)
         {
-            steps = new _StepTemplatePattern[2] {
-                new CardReq.DefenseCardRequisition(ctx,duelStatus),
+            steps = new _StepTemplatePattern[] {
                 new ElementReq.DefenseElementRequisition(ctx,duelStatus),
             };
         }

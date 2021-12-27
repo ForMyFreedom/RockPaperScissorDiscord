@@ -24,7 +24,7 @@ namespace RockPaperScissor.Duel.Fases.CardReq
 
         protected override string GetRequestCardMessage()
         {
-            return $"Agora, {GetCurrentPlayer().Mention}, escolha um index de carta de seu deck de duelo para ser sua Carta de Defesa";
+            return GetCurrentPlayer().Mention+" "+MyUtilities.GetMessager(GetCurrentPlayer()).ChooseADefenseIndex();
         }
 
         protected override bool NeedToMarkCardAsUsed()

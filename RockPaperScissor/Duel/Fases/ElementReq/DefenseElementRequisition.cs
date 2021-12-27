@@ -5,10 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
 using DSharpPlus.CommandsNext;
-using DSharpPlus.CommandsNext.Attributes;
 using DSharpPlus.Entities;
-using DSharpPlus.Interactivity.Extensions;
-using RockPaperScissor.Data;
 using RockPaperScissor.Util;
 
 namespace RockPaperScissor.Duel.Fases.ElementReq
@@ -24,7 +21,7 @@ namespace RockPaperScissor.Duel.Fases.ElementReq
 
         protected override string GetRequestElementMessage()
         {
-            return $"Ainda no Defensor, escolha um elemento ('imp','pre','enc','pod') para ser sua Defesa";
+            return GetCurrentPlayer().Mention + " " + MyUtilities.GetMessager(GetCurrentPlayer()).ChooseDefenseElement();
         }
 
         protected override void SetCurrentElement(int id)
