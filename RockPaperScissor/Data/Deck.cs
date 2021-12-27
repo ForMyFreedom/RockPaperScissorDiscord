@@ -14,7 +14,6 @@ namespace RockPaperScissor.Data
         string language;
         List<List<int>> duelDecksList;
 
-
         public Deck(ulong memberID)
         {//Create new Deck in game
             allCards = new List<Card>(30);

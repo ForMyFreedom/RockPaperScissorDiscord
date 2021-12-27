@@ -4,6 +4,7 @@ using DSharpPlus.Entities;
 using DSharpPlus.Interactivity.Extensions;
 using RockPaperScissor.Data;
 using System.Threading.Tasks;
+using System;
 
 
 namespace RockPaperScissor.Commands

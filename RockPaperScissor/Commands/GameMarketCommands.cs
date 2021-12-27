@@ -17,16 +17,16 @@ namespace RockPaperScissor.Commands
         [Command("sell")]
         [RequireGuild]
         [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
-        public async Task MakeCardSell(CommandContext ctx, DiscordMember member, int coinsQuant, int cardID)
+        public async Task MakeCardSell(CommandContext ctx, DiscordMember member, int cardID, int coinsQuant)
         {
-            await sellMethod.MakeCardDeal(ctx, member, coinsQuant, cardID);
+            await sellMethod.MakeCardDeal(ctx, member, cardID, coinsQuant);
         }
 
 
         [Command("offer")]
         [RequireGuild]
         [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
-        public async Task MakeCardOffer(CommandContext ctx, DiscordMember member, int cardID, int coinsQuant)
+        public async Task MakeCardOffer(CommandContext ctx, DiscordMember member, int coinsQuant, int cardID)
         {
             await offerMethod.MakeCardDeal(ctx, member, cardID, coinsQuant);
         }

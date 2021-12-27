@@ -23,7 +23,7 @@ namespace RockPaperScissor.Text
                 if (language.GetLanguageAbbreviation() == abbreviation)
                     return language;
             }
-            return null;
+            return new EnglishTextGerenciator();
         }
 
         public static TextMessagesGerenciator GetMemberGerenciator(DiscordMember member)

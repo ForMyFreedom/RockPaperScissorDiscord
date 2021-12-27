@@ -36,6 +36,7 @@ namespace RockPaperScissor.Commands
         {
             if (!await ConditionsDiscordInterface.PlayerIsCardMaster(ctx, ctx.User.Id)) return;
 
+
             if (TextSingleton.GetGerenciator(newLanguageAbbreviation) != null)
             {
                 AllGameData.GetMemberDeck(ctx.User.Id).SetLanguage(newLanguageAbbreviation);

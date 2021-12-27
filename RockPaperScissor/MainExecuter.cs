@@ -39,7 +39,6 @@ namespace RockPaperScissor
 
 
 
-
         private static void CreateDiscordClient(DiscordConfiguration cdc)
         {
             discord = new DiscordClient(cdc);
@@ -72,11 +71,18 @@ namespace RockPaperScissor
 
         private static void StartTheBaseOfDiscordCommands()
         {
-            commands = discord.UseCommandsNext(new CommandsNextConfiguration()
+            commands = discord.UseCommandsNext(GetCommandsNextConfiguration());
+        }
+
+
+        private static CommandsNextConfiguration GetCommandsNextConfiguration()
+        {
+            return new CommandsNextConfiguration()
             {
                 StringPrefixes = DiscordPrefixes
-            });
+            };
         }
+
 
         public static void RegisterPreWarCommands()
         {
