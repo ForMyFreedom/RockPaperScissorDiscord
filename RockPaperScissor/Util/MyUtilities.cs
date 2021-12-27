@@ -1,11 +1,12 @@
 ﻿using DSharpPlus;
+using DSharpPlus.Entities;
 using DSharpPlus.CommandsNext;
 using RockPaperScissor.Data;
-using System;
+using RockPaperScissor.Text;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using RockPaperScissor.Text;
+using System;
 
 namespace RockPaperScissor.Util
 {
@@ -110,12 +111,19 @@ namespace RockPaperScissor.Util
 
         public static TextMessagesGerenciator GetMessager(CommandContext ctx)
         {
-            return TextSingleton.GetMemberGerenciator(ctx.Member);
+            return GetMessager(ctx.Member);
+        }
+
+        public static TextMessagesGerenciator GetMessager(DiscordMember member)
+        {
+            return TextSingleton.GetMemberGerenciator(member);
         }
 
         public static String GetFormatText(String baseMessage, object[] data)
         {
-            Regex regex = new Regex(Regex.Escape("@"));
+            if (data[0] == null) return baseMessage;
+
+            Regex regex = new Regex(Regex.Escape("&"));
             String message = baseMessage;
 
             foreach(object obj in data)

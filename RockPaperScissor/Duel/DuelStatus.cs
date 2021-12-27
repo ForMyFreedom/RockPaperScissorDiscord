@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RockPaperScissor.Data;
+using RockPaperScissor.Util;
 using DSharpPlus.Entities;
 
 namespace RockPaperScissor.Duel
@@ -70,10 +71,13 @@ namespace RockPaperScissor.Duel
             winLoseCondition = new BlankWinLoseCondition();
         }
 
-        public String GetStyleToString()
+        public String GetStyleToString(DiscordMember member)
         {
             //@implement the variations
-            return $"Quantidade de Cartas: {quantOfCards}";
+            return
+            (
+                $"{MyUtilities.GetMessager(member).QuantOfCards()}: {quantOfCards}"            
+            );
         }
 
 

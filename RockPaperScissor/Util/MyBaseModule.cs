@@ -1,5 +1,6 @@
 ﻿using System;
 using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
 using RockPaperScissor.Text;
 
 namespace RockPaperScissor.Util
@@ -9,6 +10,11 @@ namespace RockPaperScissor.Util
         protected TextMessagesGerenciator GetMessager(CommandContext ctx)
         {
             return TextSingleton.GetMemberGerenciator(ctx.User.Id);
+        }
+
+        protected TextMessagesGerenciator GetMessager(DiscordMember member)
+        {
+            return TextSingleton.GetMemberGerenciator(member);
         }
     }
 }
