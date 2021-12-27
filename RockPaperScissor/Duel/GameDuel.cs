@@ -22,10 +22,11 @@ namespace RockPaperScissor.Duel
         Random rgn = new Random();
 
         FirstAttackFase firstAttackFase;
-        DefenseFase defenseFase;
+        FirstDefenseFase firstDefenseFase;
         SecondAttackFase secondAttackFase;
+        SecondDefenseFase secondDefenseFase;
 
-        static int VANTAGE_VALUE = 3;
+        static int VANTAGE_VALUE = 2;
 
 
         public GameDuel(CommandContext ctx, DuelStatus duelStatus)
@@ -34,8 +35,9 @@ namespace RockPaperScissor.Duel
             this.ctx = ctx;
 
             firstAttackFase = new FirstAttackFase(ctx, duelStatus);
-            defenseFase = new DefenseFase(ctx, duelStatus);
+            firstDefenseFase = new FirstDefenseFase(ctx, duelStatus);
             secondAttackFase = new SecondAttackFase(ctx, duelStatus);
+            secondDefenseFase = new SecondDefenseFase(ctx, duelStatus);
         }
 
 
@@ -43,19 +45,19 @@ namespace RockPaperScissor.Duel
         {
             duelStatus.SetGameContinue(true);
             duelStatus.SetAttackPlayerIndex(SortInitialAttackPlayer());
-
-            await ctx.Channel.SendMessageAsync($"**{MyUtilities.GetMessager(ctx).DuelStart()}**");
+            await SendStartDuelMessage();
 
             do
             {
-                await ctx.Channel.SendMessageAsync($"{duelStatus.GetAttackPlayer().Mention}"+ MyUtilities.GetMessager(ctx).IsInTheAttack());
+                await ctx.Channel.SendMessageAsync($"{duelStatus.GetAttackPlayer().Mention} "+ MyUtilities.GetMessager(duelStatus.GetAttackPlayer()).IsInTheAttack());
                 await firstAttackFase.DoTheFase();
-                await defenseFase.DoTheFase();
+                await firstDefenseFase.DoTheFase();
                 await secondAttackFase.DoTheFase();
+                await secondDefenseFase.DoTheFase();
                 await DoResolutionOfTurn();
             } while (duelStatus.GetGameContinue());
 
-            await ctx.Channel.SendMessageAsync($"**{MyUtilities.GetMessager(ctx).DuelEnd()}**");
+            await SendEndDuelMessage();
             await DoResolutionOfGame();
         }
 
@@ -66,7 +68,10 @@ namespace RockPaperScissor.Duel
             if (!duelStatus.GetGameContinue()) return;
             int attackDefenseDif = CompareTheValues();
             int elementalBonus = ApplyAdvantages();
-            attackDefenseDif += elementalBonus;
+
+            if(BonusIsApplicable(elementalBonus))
+                attackDefenseDif += elementalBonus;
+
             DefineTurnWinner(attackDefenseDif);
             GiveOneVictoryPointToWinner();
             await ShowTurnWinner(attackDefenseDif, elementalBonus);
@@ -88,7 +93,11 @@ namespace RockPaperScissor.Duel
 
         private async Task PlayDrawn()
         {
-            await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).DuelWasDraw());
+            await SendFormatMessageToDifferentLanguages(
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[0]).DuelWasDraw,
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[1]).DuelWasDraw,
+                null
+            );
         }
 
         private async Task PlayWin(int winnerId)
@@ -137,7 +146,7 @@ namespace RockPaperScissor.Duel
         {
             int distance = MyUtilities.GetCircularDistanceInIntArray(atkElement, defElement, 3, true);
                                                       //In circular distance of 3 elements:
-            if (distance == 1) return +VANTAGE_VALUE; // 1 means that is in front, then advantage to attack 
+            if (distance == 1) return +VANTAGE_VALUE; // 1 means that is in front, then advantage to attack
             if (distance == 2) return -VANTAGE_VALUE; // 2 means that is in back, then advantage to defense
             return 0;
         }
@@ -175,11 +184,19 @@ namespace RockPaperScissor.Duel
             await Task.Delay(2000);
             await ctx.Channel.SendMessageAsync($"**{elementalStringAdvantage}**");
             await Task.Delay(2000);
-            await ctx.Channel.SendMessageAsync(GetWinText());
+            await SendWinText();
             await Task.Delay(1000);
-            await ctx.Channel.SendMessageAsync($"Parabens, {winnerName}. Você venceu esse turno com { Math.Abs(winDif)} pontos a mais"); //@
+
+            await SendFormatMessageToDifferentLanguages(
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[0]).CongratWinTurn,
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[1]).CongratWinTurn,
+                new object[] { winnerName, Math.Abs(winDif) }
+            );
+
             await Task.Delay(2000);
         }
+
+
 
         private string GetStringAdvantage(int elementalBonus)
         {
@@ -204,12 +221,19 @@ namespace RockPaperScissor.Duel
                 duelStatus.GetDefenseCardIndex()).ToString();
         }
 
-        private string GetWinText()
+        private async Task SendWinText()
         {
-            if(duelStatus.GetTurnWinnerIndex() == duelStatus.GetAttackPlayerIndex())
-                return "Porem o ataque venceu!"; //@
-            else
-                return "E a defesa venceu!";    //@
+            Func<String>[] funcs = new Func<string>[2];
+
+            for(int i = 0; i < 2; i++)
+            {
+                if (duelStatus.GetTurnWinnerIndex() == duelStatus.GetAttackPlayerIndex())
+                    funcs[i] = MyUtilities.GetMessager(duelStatus.GetCombatents()[i]).TheAttackWin;
+                else
+                    funcs[i] = MyUtilities.GetMessager(duelStatus.GetCombatents()[i]).TheDefenseWin;
+            }
+
+            await SendFormatMessageToDifferentLanguages(funcs[0], funcs[1], null);
         }
 
 
@@ -246,10 +270,13 @@ namespace RockPaperScissor.Duel
 
         private async Task CongratWinner(int winnerIndex)
         {
-            await ctx.Channel.SendMessageAsync( //@
-                $"Parabêns, {duelStatus.GetCombatents()[winnerIndex].Mention}, voce venceu " +
-                $"esse duelo contra {duelStatus.GetCombatents()[1-winnerIndex].Mention} com " +
-                $"incrível maestria"
+            await SendFormatMessageToDifferentLanguages(
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[0]).CongratWinGame,
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[1]).CongratWinGame,
+                new object[]
+                {
+                    duelStatus.GetCombatents()[winnerIndex].Mention, duelStatus.GetCombatents()[1-winnerIndex].Mention
+                }
             );
         }
 
@@ -257,7 +284,13 @@ namespace RockPaperScissor.Duel
         private async Task GiveBasicProfitsAndLosses(int id)
         {
             int coins = duelStatus.GetPremiumCoins();
-            await ctx.Channel.SendMessageAsync($"O Duelista vencedor recebe {coins}ℳ, ao passo que o perdedor perde {coins}ℳ"); //@
+
+            await SendFormatMessageToDifferentLanguages(
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[0]).WinnerGetCoinsLoserMissCoins,
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[1]).WinnerGetCoinsLoserMissCoins,
+                new object[] {coins, coins}
+            );
+
             AllGameData.MakeTransference(duelStatus.GetCombatents()[1 - id], duelStatus.GetCombatents()[id], duelStatus.GetPremiumCoins());
         }
     
@@ -269,5 +302,66 @@ namespace RockPaperScissor.Duel
                 AllGameData.GetMemberDeck(combatent).SetDueling(false);
             }
         }
+
+
+        private async Task SendFormatMessageToDifferentLanguages(Func<String> funcToOne, Func<String> funcToTwo, object[] args, bool _reverseArgs=false)
+        {
+            if (args == null)
+                args = new object[] { null };
+
+            if (DuelistLanguagesAreDiferrent())
+                await ctx.Channel.SendMessageAsync(MyUtilities.GetFormatText(funcToOne.Invoke(), args));
+
+            if (_reverseArgs)
+                args = args.Reverse().ToArray();
+
+            await ctx.Channel.SendMessageAsync(MyUtilities.GetFormatText(funcToTwo.Invoke(), args));
+        }
+
+
+
+
+        private bool DuelistLanguagesAreDiferrent()
+        {
+            DiscordMember[] combatents = duelStatus.GetCombatents();
+            return (
+                AllGameData.GetMemberDeck(combatents[0]).GetLanguage() !=
+                AllGameData.GetMemberDeck(combatents[1]).GetLanguage()
+            );
+        }
+
+
+        private async Task SendStartDuelMessage()
+        {
+            await SendFormatMessageToDifferentLanguages(
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[0]).DuelStart,
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[1]).DuelStart,
+                null
+            );
+        }
+
+        private async Task SendEndDuelMessage()
+        {
+            await SendFormatMessageToDifferentLanguages(
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[0]).DuelEnd,
+                MyUtilities.GetMessager(duelStatus.GetCombatents()[1]).DuelEnd,
+                null
+            );
+        }
+
+
+        private bool BonusIsApplicable(int bonus)
+        {
+            if (bonus == 0) return false;
+            int originalValue;
+            
+            if (bonus > 0)
+                originalValue = AllGameData.GetMemberDeck(duelStatus.GetAttackPlayer()).GetCardById(duelStatus.GetDefinitiveAttackCardIndex()).GetElements()[duelStatus.GetAttackElement()];
+            else
+                originalValue = AllGameData.GetMemberDeck(duelStatus.GetDefensePlayer()).GetCardById(duelStatus.GetDefenseCardIndex()).GetElements()[duelStatus.GetDefenseElement()];
+            
+            return originalValue >= 1;
+        }
+
     }
 }
