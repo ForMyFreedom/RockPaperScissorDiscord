@@ -23,7 +23,7 @@ namespace RockPaperScissor.Market
         {
             String firstData = AllGameData.GetMemberDeck(member).GetCardById(secondCardID).ToString();
             String secondData = AllGameData.GetMemberDeck(ctx.Member).GetCardById(firstCardID).ToString();
-            return MyUtilities.GetFormatText(MyUtilities.GetMessager(ctx).DealMessageTemplate(), new[] { ctx.Member.Nickname, firstData, secondData });
+            return MyUtilities.GetFormatText(MyUtilities.GetMessager(member).DealMessageTemplate(), new[] { ctx.Member.Nickname, firstData, secondData });
         }
 
 

@@ -44,7 +44,7 @@ namespace RockPaperScissor.Market
         {
             String messageContent = GetDealMessageContent(ctx, member, firstCardID, secondCardID);
             await member.SendMessageAsync(messageContent);
-            var message = await member.SendMessageAsync($"\n **{MyUtilities.GetMessager(ctx).EmojiDealReaction()}**");
+            var message = await member.SendMessageAsync($"\n **{MyUtilities.GetMessager(member).EmojiDealReaction()}**");
 
             var result = await message.WaitForReactionAsync(member);
             if (!result.TimedOut) return true;

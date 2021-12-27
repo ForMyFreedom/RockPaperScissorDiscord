@@ -35,17 +35,13 @@ namespace RockPaperScissor.Commands
             duelStatus.SetOneCombatent(0, ctx.Member);
 
             await ctx.Channel.SendMessageAsync(GetMessager(ctx).DuelProposalSent());
-            try
-            {
-                duelStatus = await WaitForChallengedMemberResponse(ctx, member, duelStatus);
-            } catch(Exception e)
-            {
-                Console.WriteLine(e.Message);
-            }
-
             
+            duelStatus = await WaitForChallengedMemberResponse(ctx, member, duelStatus);
 
-            await DeterminePresence(ctx, duelStatus);
+            if (duelStatus != null)
+                await DeterminePresence(ctx, duelStatus);
+            else
+                await ctx.Channel.SendMessageAsync(GetMessager(ctx).DuelCanceled());
         }
 
 
@@ -65,10 +61,10 @@ namespace RockPaperScissor.Commands
 
         private async Task<DuelStatus> WaitForChallengedMemberResponse(CommandContext ctx, DiscordMember member, DuelStatus duelStatus)
         {
-            await member.SendMessageAsync(GetMessager(ctx).YouAreConvoke() + $"'{ctx.Member.Nickname}'");
-            await member.SendMessageAsync(GetMessager(ctx).DuelFollowsFormat());
-            await member.SendMessageAsync(duelStatus.GetStyleToString());
-            DiscordMessage message = await member.SendMessageAsync(GetMessager(ctx).RequestConfirmationOfDuel());
+            await member.SendMessageAsync(GetMessager(member).YouAreConvoke() + $"'{ctx.Member.Nickname}'");
+            await member.SendMessageAsync(GetMessager(member).DuelFollowsFormat());
+            await member.SendMessageAsync(duelStatus.GetStyleToString(member));
+            DiscordMessage message = await member.SendMessageAsync(GetMessager(member).RequestConfirmationOfDuel());
 
 
             var interativity = ctx.Client.GetInteractivity();
@@ -76,6 +72,12 @@ namespace RockPaperScissor.Commands
             (
                 m => m.Channel == message.Channel && m.ReferencedMessage == message
             ).ConfigureAwait(false);
+
+            if (result.TimedOut)
+            {
+                //@
+                return null;
+            }
 
             String response = result.Result.Content;
 
@@ -110,6 +112,8 @@ namespace RockPaperScissor.Commands
                 await ctx.Channel.SendMessageAsync(GetMessager(ctx).DuelCanceled());
             }
         }
+
+
 
         private void RegisterDuelInDecks(DuelStatus duelStatus)
         {
