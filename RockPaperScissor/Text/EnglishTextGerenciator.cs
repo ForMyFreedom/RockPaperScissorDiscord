@@ -60,7 +60,7 @@ namespace RockPaperScissor.Text
 
         public override string DealMessageTemplate()
         {
-            return "@ proposes the deal: \n @ \n For @ that he has";
+            return "& proposes the deal: \n & \n For & that he has";
         }
 
         public override string DealDeclined()
@@ -168,6 +168,11 @@ namespace RockPaperScissor.Text
             return "You can't create another deck";
         }
 
+        public override string DuelIgnored()
+        {
+            return "The duel was ignored...";
+        }
+
         public override string DuelCanceled()
         {
             return "Unfortunately, the Duel was cancelled...";
@@ -241,6 +246,66 @@ namespace RockPaperScissor.Text
         public override string OneMoreChanceBeforeLostTheDuel()
         {
             return "You have one more chance before you lose the duel...";
+        }
+
+        public override string ChooseADefenseIndex()
+        {
+            return "choose a card index of your duel deck to be your defense card";
+        }
+
+        public override string ChooseAAttackFront()
+        {
+            return "Choose two card indexes of your duel deck to be your Attack Front. Separated with a space";
+        }
+
+        public override string ChooseDefinitiveAttackIndex()
+        {
+            return "Attack Player, which card of your Attak Front you want to use";
+        }
+
+        public override string ChooseDefenseElement()
+        {
+            return "Defender, choose an element ('imp','pre','enc','pod') to be your Defense Element";
+        }
+
+        public override string ChooseAttackElement()
+        {
+            return "Still on the Attacker, choose an element ('imp','pre','enc','pod') to be your Attack Element";
+        }
+
+        public override string QuantOfCards()//@
+        {
+            return "Quant of Cards";
+        }
+
+        public override string CongratWinTurn()
+        {
+            return "Congratulations, &. You win this turn with & points more";
+        }
+
+        public override string CongratWinGame()
+        {
+            return "Congratulations, &. You win this duel against & with incredible maestry";
+        }
+
+        public override string TheAttackWin()
+        {
+            return "However the attack win!";
+        }
+
+        public override string TheDefenseWin()
+        {
+            return "And the defense win!";
+        }
+
+        public override string WinnerGetCoinsLoserMissCoins()
+        {
+            return "The winner duelist receive &ℳ, while the loser lost &ℳ";
+        }
+
+        public override string CantResetAfterEarlyClaim()
+        {
+            return "You can't delete your deck before be able to claim a new card";
         }
     }
 }

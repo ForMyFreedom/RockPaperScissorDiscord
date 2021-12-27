@@ -61,7 +61,7 @@ namespace RockPaperScissor.Text
 
         public override string DealMessageTemplate()
         {
-            return "@ lhe propõe a troca: \n @ \n Por @ que ele possui";
+            return "& lhe propõe a troca: \n & \n Por & que ele possui";
         }
 
         public override string DealDeclined()
@@ -168,6 +168,12 @@ namespace RockPaperScissor.Text
         {
             return "Você não pode criar outro deck";
         }
+
+        public override string DuelIgnored()
+        {
+            return "O duelo foi ignorado...";
+        }
+
         public override string DuelCanceled()
         {
             return "Infelizmente, o Duelo foi cancelado...";
@@ -241,6 +247,66 @@ namespace RockPaperScissor.Text
         public override string OneMoreChanceBeforeLostTheDuel()
         {
             return "Você tem mais uma chance antes de perder o duelo...";
+        }
+
+        public override string ChooseADefenseIndex()
+        {
+            return "escolha um index de carta de seu deck de duelo para ser sua Carta de Defesa";
+        }
+
+        public override string ChooseAAttackFront()
+        {
+            return "Escolha dois index de cartas de seu deck de duelo para serem seu Fronte de Ataque. Separadas com um espaço";
+        }
+
+        public override string ChooseDefinitiveAttackIndex()
+        {
+            return "Por fim, Jogador de Ataque, qual carta de seu Fronte de Ataques você deseja usar";
+        }
+
+        public override string ChooseDefenseElement()
+        {
+            return "Ainda no Defensor, escolha um elemento ('imp','pre','enc','pod') para ser seu Elemento de Defesa";
+        }
+
+        public override string ChooseAttackElement()
+        {
+            return "Ainda no Atacante, escolha um elemento ('imp','pre','enc','pod') para ser seu Elemento de Ataque";
+        }
+
+        public override string QuantOfCards()
+        {
+            return "Quantidade de Cartas";
+        }
+
+        public override string CongratWinTurn()
+        {
+            return "Parabêns, &. Você venceu esse turno com & pontos a mais";
+        }
+
+        public override string CongratWinGame()
+        {
+            return "Parabêns, &. Você venceu esse duelo contra & com incrível maestria";
+        }
+
+        public override string TheAttackWin()
+        {
+            return "Porem o ataque venceu!";
+        }
+
+        public override string TheDefenseWin()
+        {
+            return "E a defesa venceu!";
+        }
+
+        public override string WinnerGetCoinsLoserMissCoins()
+        {
+            return "O Duelista vencedor recebe &ℳ, ao passo que o perdedor perde &ℳ";
+        }
+
+        public override string CantResetAfterEarlyClaim()
+        {
+            return "Você não pode deleter o seu deck antes de ser capaz de pegar uma nova carta";
         }
     }
 }

@@ -10,7 +10,6 @@ namespace RockPaperScissor.Text
     {
         public abstract String GetLanguageName();
         public abstract String GetLanguageAbbreviation();
-
         public abstract String MemberDontHaveDeck();
         public abstract String CardIdDontExist();
         public abstract String NotEnoughCoins();
@@ -41,20 +40,33 @@ namespace RockPaperScissor.Text
         public abstract String WrongDeckIndex();
         public abstract String MoreCardsThatIsPermitted();
         public abstract String CantCreateAnotherDeck();
-        public abstract String DuelCanceled(); //"Infelizmente, o Duelo foi cancelado..."
-        public abstract String DuelProposalSent(); //"Proposta de Duelo enviada!"
-        public abstract String YouAreConvoke(); //"Você é convocado para um duelo pelo duelista: "
-        public abstract String DuelFollowsFormat();//"O Duelo segue o seguinte formato:"
-        public abstract String RequestConfirmationOfDuel();//"Responda (literalmente) essa mensagem com o Index de seu Deck de Duelo escolhido caso deseje batalhar"
-        public abstract String YouCantRepeatCard();//"Você não pode repetir cartas"
-        public abstract String DuelDeckWithIncorretFormat();//"O Deck de Duelo não está adequado ao formato do duelo"
-        public abstract String CantUseActionWhileDueling();//"Voce não pode usar essa ação enquanto duelar!"
-        public abstract String ChooseWrongIndexOrBlockedCard();//"Você pode ter cometido um erro ou a carta referênciada esta bloqueada para venda"
-        public abstract String DuelStart();//"O DUELO SE INICIA!"
-        public abstract String DuelEnd();//"O DUELO ENCONTRA SEU FIM!"
-        public abstract String IsInTheAttack();//esta no Ataque!
-        public abstract String DuelWasDraw();//"O Duelo acabou em empate, e com isso, nenhum dos lados ganham ou perdem..."
-        public abstract String YouLostByTooMuchErrors();//"Você perdeu o duelo por exesso de erros"
-        public abstract String OneMoreChanceBeforeLostTheDuel();//"Você tem mais uma chance antes de perder o duelo..."
+        public abstract String DuelIgnored();
+        public abstract String DuelCanceled();
+        public abstract String DuelProposalSent();
+        public abstract String YouAreConvoke();
+        public abstract String DuelFollowsFormat();
+        public abstract String RequestConfirmationOfDuel();
+        public abstract String YouCantRepeatCard();
+        public abstract String DuelDeckWithIncorretFormat();
+        public abstract String CantUseActionWhileDueling();
+        public abstract String ChooseWrongIndexOrBlockedCard();
+        public abstract String DuelStart();
+        public abstract String DuelEnd();
+        public abstract String IsInTheAttack();
+        public abstract String DuelWasDraw();
+        public abstract String YouLostByTooMuchErrors();
+        public abstract String OneMoreChanceBeforeLostTheDuel();
+        public abstract String ChooseADefenseIndex();
+        public abstract String ChooseAAttackFront();
+        public abstract String ChooseDefinitiveAttackIndex();
+        public abstract String ChooseDefenseElement();
+        public abstract String ChooseAttackElement();
+        public abstract String QuantOfCards();
+        public abstract String CongratWinTurn();
+        public abstract String CongratWinGame();
+        public abstract String TheAttackWin();
+        public abstract String TheDefenseWin();
+        public abstract String WinnerGetCoinsLoserMissCoins();
+        public abstract String CantResetAfterEarlyClaim();
     }
 }
