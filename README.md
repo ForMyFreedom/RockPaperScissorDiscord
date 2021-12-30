@@ -8,9 +8,9 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 ## CURRENT TO DO LIST
 - [x] Implement the Bases of Duel
 - [ ] Implement the Elemental Award
+- [ ] Find a way to make the make a multiple server hosting...
 - [ ] Implement the Duel Variations of Game and WinLoseConditions
 - [ ] There is no logic in element when the card does not correspond to the chosen element. Advantage need to be re-write
-- [ ] Solve problems with private and server assumptions (There is no conection of an player and a server)
 
 ## DECTECTED BUGS / ISSUES
 - [x] When you make a trade which you dispense a card, the duel_deck won't remove it. It turns a ghost card!
@@ -23,7 +23,7 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 
 ## To Contributors
 It's necessary to have a Discord Token in their Develop Portal. After get it, you need to run the 'token_file_creator.py' archive in the directory that have all the codes.
-After that, i belive you will run this application without problems.
+After that, i belive you will run this application without problems [In the time of this commit, this project cannot support multiple server hosting. You can only have one server!].
 
 In case you insert a new text to be showed to the user, create a new function in TextMessageGerenciator and use the one of the methods GetGerenciator. In the case you want to translate to all language, thanks! But you don't really need it, just inherits English and create all the 'throw new NotImplementedException();' methods... Sometime I will translate to the other languages.
 
