@@ -22,8 +22,10 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 ---
 
 ## To Contributors
+### Programers
 It's necessary to have a Discord Token in their Develop Portal. After get it, you need to run the 'token_file_creator.py' archive in the directory that have all the codes.
-After that, i belive you will run this application without problems
+After that, i belive you will run this application without problems.
+In case you insert a new text to be showed to the user, create a new function in TextMessageGerenciator and use the one of the methods GetGerenciator. In the case you want to translate to all language, thanks! But you don't really need it, just inherits English and create all the 'throw new NotImplementedException();' methods... Sometime I will translate to the other languages.
 
 
 ---
@@ -95,15 +97,16 @@ And finally, ever card you get that way will come with a Star value that represe
 The Standard Duel (3 Cards, Not equal Star, Without bet) follows the following procediment:
   * 1. The system raffle a Duelist to start in the Attack, while the another will be de Defense
   * 2. Makes the First-Attack-Fase
-        * a. The Attack Duelist chooses an Element to be the Attacker (Impact, Precision, Enchant and Power [Sum of all elements])
-        * b. The Attack Duelist chooses two Cards from its Duel Deck to be the Attack Front
+        * a. The Attack Duelist chooses two Cards from its Duel Deck to be the Attack Front
   * 3. Makes the Defense-Fase
-        * a. The Defense Duelist chooses an Element to be the Defender as the Attack Duelist did
-        * b. The Defense Duelist chooses one Card from its Duel Deck to be the Defense Card
+        * a. The Defense Duelist chooses one Card from its Duel Deck to be the Defense Card
   * 4. Makes the Second-Attack-Fase
-        * a. Finnaly, the Attack Duelist chooses one Card from its Attack Front to be definitive Attack Card 
+        * a. The Attack Duelist chooses one Card from its Attack Front to be definitive Attack Card
+        * b. The Attack Duelist chooses an Element to be the Attacker (Impact, Precision, Enchant and Power [Sum of all elements])
+  * 4. Makes the Second-Defense-Fase
+        * a. Finally, the Defense Duelist chooses an Element to be the Defender as the Attack Duelist did
   * 5. Makes the Resolution
-        * a. Compare the Elements (In case of dominance, sums +3 in value of the Element. All the elements have dominance against Power [Except Power])
+        * a. Compare the Elements (In case of dominance, sums +2 in value of the Element. All the elements have dominance against Power [Except Power])
         * b. The Duelist with the higher value in the choosed Element, wins the round and receive 1 Point of Victory
         * c. The Duelist who wins the round receives the Elemental Award [Poder don't have Elemental Award]
   * 6. In the end, the Duelist with more Victory Points is the Winner of the Duel
