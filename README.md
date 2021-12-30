@@ -29,6 +29,14 @@ In case you insert a new text to be showed to the user, create a new function in
 
 If you find a grammar/translation error, fell free to create a issue!
 
+
+### Current Language Support:
+Native Name | English Name | Abbreviation
+:---: | :---: | :---: |
+English | English | en
+Português | Portuguese | pt
+Español | Spanish | es
+
 ---
 ---
 
