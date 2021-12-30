@@ -22,11 +22,12 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 ---
 
 ## To Contributors
-### Programers
 It's necessary to have a Discord Token in their Develop Portal. After get it, you need to run the 'token_file_creator.py' archive in the directory that have all the codes.
 After that, i belive you will run this application without problems.
+
 In case you insert a new text to be showed to the user, create a new function in TextMessageGerenciator and use the one of the methods GetGerenciator. In the case you want to translate to all language, thanks! But you don't really need it, just inherits English and create all the 'throw new NotImplementedException();' methods... Sometime I will translate to the other languages.
 
+If you find a grammar/translation error, fell free to create a issue!
 
 ---
 ---
