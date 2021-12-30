@@ -1,6 +1,7 @@
 ﻿using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using RockPaperScissor.Data;
+using RockPaperScissor.Util;
 using System;
 
 namespace RockPaperScissor.Market
@@ -12,16 +13,17 @@ namespace RockPaperScissor.Market
             return
             (
                 PlayerHasTheCoins(ctx.Member, coinsQuant) &&
-                PlayerHasTheCardId(member, cardID)
+                PlayerHasTheCardId(member, cardID) &&
+                !CardInADuelDeck(member, cardID)
             );
         }
 
 
         protected override string GetDealMessageContent(CommandContext ctx, DiscordMember member, int cardID, int coinsQuant)
         {
-            String cardString = AllGameData.GetMemberDeck(member).GetCardById(cardID).ToString();
-            String messageContent = $"{ctx.Member.Nickname} lhe propõe a troca: \n {cardString} sua \n por {coinsQuant} ℳ que ele possui";
-            return messageContent;
+            String firstData = AllGameData.GetMemberDeck(member).GetCardById(cardID).ToString();
+            String secondData = coinsQuant.ToString()+"ℳ";
+            return MyUtilities.GetFormatText(MyUtilities.GetMessager(member).DealMessageTemplate(), new[] { ctx.Member.Nickname, firstData, secondData });
         }
 
 

@@ -34,6 +34,10 @@ namespace RockPaperScissor.Data
             return $"{ID}. {name} [{MyUtilities.GetEmoteStars(stars)}] (Imp: {impact}, Pre: {precision}, Enc: {enchant})";
         }
 
+        public string ToString(string translateName)
+        {
+            return $"{ID}. {translateName} [{MyUtilities.GetEmoteStars(stars)}] (Imp: {impact}, Pre: {precision}, Enc: {enchant})";
+        }
 
 
         public int GetID()

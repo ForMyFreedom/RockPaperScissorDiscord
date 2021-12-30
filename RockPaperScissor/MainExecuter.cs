@@ -25,7 +25,6 @@ namespace RockPaperScissor
         }
 
 
-
         static private async Task StartAsyncBot()
         {
             CreateDiscordClient(GetDiscordConfiguration());
@@ -37,7 +36,6 @@ namespace RockPaperScissor
             await discord.ConnectAsync();
             await Task.Delay(-1);
         }
-
 
 
 
@@ -66,18 +64,25 @@ namespace RockPaperScissor
             discord.UseInteractivity(new InteractivityConfiguration()
             {
                 PollBehaviour = PollBehaviour.KeepEmojis,
-                Timeout = TimeSpan.FromMinutes(1)
+                Timeout = TimeSpan.FromSeconds(30)
             });
         }
 
 
         private static void StartTheBaseOfDiscordCommands()
         {
-            commands = discord.UseCommandsNext(new CommandsNextConfiguration()
+            commands = discord.UseCommandsNext(GetCommandsNextConfiguration());
+        }
+
+
+        private static CommandsNextConfiguration GetCommandsNextConfiguration()
+        {
+            return new CommandsNextConfiguration()
             {
                 StringPrefixes = DiscordPrefixes
-            });
+            };
         }
+
 
         public static void RegisterPreWarCommands()
         {
@@ -92,6 +97,8 @@ namespace RockPaperScissor
             commands.RegisterCommands<Commands.CardClaimCommand>();
             commands.RegisterCommands<Commands.GameMarketCommands>();
             commands.RegisterCommands<Commands.DuelDeckCommands>();
+            commands.RegisterCommands<Commands.BattleCommands>();
+            commands.RegisterCommands<Commands.LanguageCommands>();
         }
 
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissor.Commands
 {
-    class GameMarketCommands : BaseCommandModule
+    class GameMarketCommands : Util.MyBaseModule
     {
         SellMethod sellMethod = new SellMethod();
         OfferMethod offerMethod = new OfferMethod();
@@ -17,18 +17,16 @@ namespace RockPaperScissor.Commands
         [Command("sell")]
         [RequireGuild]
         [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
-        [Description("Sugere troca com um **mestre**, de **sua carta** por **dinheiro dele**")]
-        public async Task MakeCardSell(CommandContext ctx, DiscordMember member, int coinsQuant, int cardID)
+        public async Task MakeCardSell(CommandContext ctx, DiscordMember member, int cardID, int coinsQuant)
         {
-            await sellMethod.MakeCardDeal(ctx, member, coinsQuant, cardID);
+            await sellMethod.MakeCardDeal(ctx, member, cardID, coinsQuant);
         }
 
 
         [Command("offer")]
         [RequireGuild]
         [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
-        [Description("Sugere troca com um **mestre**, de **seu dinheiro** por **uma carta dele**")]
-        public async Task MakeCardOffer(CommandContext ctx, DiscordMember member, int cardID, int coinsQuant)
+        public async Task MakeCardOffer(CommandContext ctx, DiscordMember member, int coinsQuant, int cardID)
         {
             await offerMethod.MakeCardDeal(ctx, member, cardID, coinsQuant);
         }
@@ -37,7 +35,6 @@ namespace RockPaperScissor.Commands
         [Command("trade")]
         [RequireGuild]
         [RequireRoles(RoleCheckMode.All, new[] { AllGameData.NAME_OF_ROLE })]
-        [Description("Sugere troca com um **mestre**, de **sua carta** por **uma carta dele**")]
         public async Task MakeCardTrade(CommandContext ctx, DiscordMember member, int firstCardID, int secondCardID)
         {
             await tradeMethod.MakeCardDeal(ctx, member, firstCardID, secondCardID);

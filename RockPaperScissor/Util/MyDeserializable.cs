@@ -29,7 +29,6 @@ namespace RockPaperScissor.Util
 
                 //Add New Global Vars Here:
                 AllGameData.gameRoleID = ulong.Parse(allGlobalGameDataArray[0]);
-
                 return true;
             }
             catch (Exception e)
@@ -57,8 +56,9 @@ namespace RockPaperScissor.Util
                             int coins = int.Parse(actualGameDataArray[2]);
                             int idCounter = int.Parse(actualGameDataArray[3]);
                             List<List<int>> duelDecks = GetDuelDeck(actualGameDataArray[4]);
+                            String language = actualGameDataArray[5];
 
-                            actualDeck = new Deck(ownerID, idCounter, coins, duelDecks);
+                            actualDeck = new Deck(ownerID, idCounter, coins, duelDecks, language);
                             AllGameData.AddDeck(actualDeck);
                             actualDeck.ResetAllCards();
                             break;

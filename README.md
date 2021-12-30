@@ -6,9 +6,17 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 
 
 ## CURRENT TO DO LIST
-- [ ] Implement the Duel
+- [x] Implement the Bases of Duel
+- [ ] Implement the Elemental Award
+- [ ] Implement the Duel Variations of Game and WinLoseConditions
+- [ ] There is no logic in element when the card does not correspond to the chosen element. Advantage need to be re-write
 - [ ] Solve problems with private and server assumptions (There is no conection of an player and a server)
-- [ ] @
+
+## DECTECTED BUGS / ISSUES
+- [x] When you make a trade which you dispense a card, the duel_deck won't remove it. It turns a ghost card!
+- [x] It is possible to create a duel_deck with repeated card index
+- [x] Is possible to change your duel_deck while the game is occurring
+- [x] Players can just farm card with: 'create_deck', 'claim', 'sell by 0', 'del_deck', 'create_deck'... I think it should be solved with a timer to delete deck
 
 ---
 ---
@@ -106,4 +114,4 @@ The Standard Duel (3 Cards, Not equal Star, Without bet) follows the following p
 
 ## FUTURE TO DO LIST
 - [ ] Events in which the participants do quest and receive tematic cards
-- [ ] Another use to coins like teasure-market, idk
+- [ ] Maybe a market where you can buy cards from the system? idk, i think coins are a little useless

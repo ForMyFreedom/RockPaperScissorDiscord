@@ -1,8 +1,12 @@
 ﻿using DSharpPlus;
+using DSharpPlus.Entities;
+using DSharpPlus.CommandsNext;
 using RockPaperScissor.Data;
-using System;
+using RockPaperScissor.Text;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
+using System;
 
 namespace RockPaperScissor.Util
 {
@@ -52,11 +56,10 @@ namespace RockPaperScissor.Util
 
 
         public static String GetDuelDeckCardsString(ulong userId, int duelDeckIndex, int[] dontPrintThatCards = null)
-
         {
             if (dontPrintThatCards == null) dontPrintThatCards = Array.Empty<int>();
 
-            String str = $"Deck de Duelo {duelDeckIndex}: \n";
+            String str = $"{TextSingleton.GetMemberGerenciator(userId).DeckDuelName()} {duelDeckIndex}: \n";
             int[] duelDeck = AllGameData.GetMemberDeck(userId).GetDuelDeck(duelDeckIndex).ToArray();
 
             foreach (int cardIndex in duelDeck)
@@ -90,6 +93,46 @@ namespace RockPaperScissor.Util
         }
 
 
+        public static string GetElementalName(int id)
+        {
+            switch (id)
+            {
+                case 0:
+                    return "IMP";
+                case 1:
+                    return "PRE";
+                case 2:
+                    return "ENC";
+                case 3:
+                    return "POD";
+            }
+            return "";
+        }
+
+        public static TextMessagesGerenciator GetMessager(CommandContext ctx)
+        {
+            return GetMessager(ctx.Member);
+        }
+
+        public static TextMessagesGerenciator GetMessager(DiscordMember member)
+        {
+            return TextSingleton.GetMemberGerenciator(member);
+        }
+
+        public static String GetFormatText(String baseMessage, object[] data)
+        {
+            if (data[0] == null) return baseMessage;
+
+            Regex regex = new Regex(Regex.Escape("&"));
+            String message = baseMessage;
+
+            foreach(object obj in data)
+            {
+                message = regex.Replace(message, obj.ToString(), 1);
+            }
+
+            return message;
+        }
 
 
 

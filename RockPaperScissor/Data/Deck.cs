@@ -10,9 +10,9 @@ namespace RockPaperScissor.Data
         ulong ownerID;
         int idCounter = 0;
         int coinsQuant;
+        bool isDueling = false;
+        string language;
         List<List<int>> duelDecksList;
-
-
 
         public Deck(ulong memberID)
         {//Create new Deck in game
@@ -20,17 +20,22 @@ namespace RockPaperScissor.Data
             CardCreator.GetStandartCardsToDeck(this);
             ownerID = memberID;
             coinsQuant = 50;
-            duelDecksList = new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH);
+            duelDecksList = new List<List<int>>(AllGameData.DUEL_DECKS_LENGTH) {
+                new List<int>(AllGameData.MAX_CARDS_IN_DUEL_DECK),
+                new List<int>(AllGameData.MAX_CARDS_IN_DUEL_DECK)
+            };
+            language = "en";
         }
 
 
-        public Deck(ulong memberID, int idCounter, int coinsQuant, List<List<int>> duelDecks)
+        public Deck(ulong memberID, int idCounter, int coinsQuant, List<List<int>> duelDecks, string language)
         {//Create new deck in load
             List<Card> allCards = new List<Card>(30);
             this.ownerID = memberID;
             this.idCounter = idCounter;
             this.coinsQuant = coinsQuant;
             this.duelDecksList = duelDecks;
+            this.language = language;
         }
 
 
@@ -135,6 +140,27 @@ namespace RockPaperScissor.Data
         public void PlusIdCounter()
         {
             idCounter++;
+        }
+
+      
+        public void SetDueling(bool b)
+        {
+            isDueling = b;
+        }
+
+        public bool GetDueling()
+        {
+            return isDueling;
+        }
+          
+        public string GetLanguage()
+        {
+            return language;
+        }
+
+        public void SetLanguage(String lan)
+        {
+            language = lan;
         }
 
     }

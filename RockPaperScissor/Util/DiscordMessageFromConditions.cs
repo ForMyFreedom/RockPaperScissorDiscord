@@ -1,85 +1,102 @@
 ﻿using DSharpPlus.Entities;
+using DSharpPlus.CommandsNext;
 using System.Threading.Tasks;
-//using RockPaperScissor.Duel;
+using RockPaperScissor.Data;
+using RockPaperScissor.Duel;
+using RockPaperScissor.Text;
 
 namespace RockPaperScissor.Util
 {
     public class ConditionsDiscordInterface
     {
-        public static async Task<bool> PlayerIsCardMaster(DiscordChannel channel, DiscordMember member)
+        public static async Task<bool> PlayerIsCardMaster(CommandContext ctx, DiscordMember member)
         {
             if (MyConditions.PlayerIsCardMaster(member)) return true;
             else
             {
-                await channel.SendMessageAsync("O membro mencionado não possui um deck");
+                await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).MemberDontHaveDeck());
                 return false;
             }
         }
 
 
-        public static async Task<bool> PlayerIsCardMaster(DiscordChannel channel, ulong id)
+        public static async Task<bool> PlayerIsCardMaster(CommandContext ctx, ulong id)
         {
             if (MyConditions.PlayerIsCardMaster(id)) return true;
             else
             {
-                await channel.SendMessageAsync("O membro mencionado não possui um deck");
+                await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).MemberDontHaveDeck());
                 return false;
             }
         }
 
 
-        public static async Task<bool> PlayerHasTheCardId(DiscordChannel channel, DiscordMember member, int cardID)
+        public static async Task<bool> PlayerHasTheCardId(CommandContext ctx, DiscordMember member, int cardID)
         {
             if (MyConditions.PlayerHasTheCardId(member, cardID)) return true;
             else
             {
-                await channel.SendMessageAsync("O mestre não possui o id de carta especificada");
+                await ctx.Channel.SendMessageAsync(
+                    MyUtilities.GetMessager(ctx).CardIdDontExist());
                 return false;
             }
         }
 
 
-        public static async Task<bool> PlayerHasTheCoins(DiscordChannel channel, DiscordMember member, int coinsQuant)
+        public static async Task<bool> PlayerHasTheCoins(CommandContext ctx, DiscordMember member, int coinsQuant)
         {
             if (MyConditions.PlayerHasTheCoins(member, coinsQuant)) return true;
             else
             {
-                await channel.SendMessageAsync("O mestre das cartas não possui essa quantidade de moedas");
+                await ctx.Channel.SendMessageAsync(
+                    MyUtilities.GetMessager(ctx).NotEnoughCoins());
                 return false;
             }
         }
 
 
-        public static async Task<bool> ChannelIsPrivate(DiscordChannel channel)
+        public static async Task<bool> ChannelIsPrivate(CommandContext ctx)
         {
-            if (MyConditions.ChannelIsPrivate(channel)) return true;
+            if (MyConditions.ChannelIsPrivate(ctx.Channel)) return true;
             else
             {
-                await channel.SendMessageAsync("Essa ação apenas pode ser chamada em meu privado...");
+                await ctx.Channel.SendMessageAsync(
+                    MyUtilities.GetMessager(ctx).OnlyPrivateCall());
                 return false;
             }
         }
 
 
-        public static async Task<bool> IsNotTheSameMember(DiscordChannel channel, DiscordMember member1, DiscordMember member2)
+        public static async Task<bool> IsNotTheSameMember(CommandContext ctx, DiscordMember member1, DiscordMember member2)
         {
             if (MyConditions.IsNotTheSameMember(member1, member2)) return true;
             else
             {
-                await channel.SendMessageAsync("Você não pode realizar esta ação consigo mesmo");
+                await ctx.Channel.SendMessageAsync(
+                    MyUtilities.GetMessager(ctx).NotCallYourself());
                 return false;
             }
         }
-        /*
-        public static async Task<bool> IsAdequatedDuelDeckToTheGameStyle(DiscordChannel channel, DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
+      
+      
+        public static async Task<bool> IsAdequatedDuelDeckToTheGameStyle(CommandContext ctx, DiscordMember member, int duelDeckIndex, DuelStatus duelStatus)
         {
             if (MyConditions.IsAdequatedDuelDeckToTheGameStyle(member, duelDeckIndex, duelStatus)) return true;
             else
             {
-                await channel.SendMessageAsync("O Deck de Duelo não está adequado ao formato do duelo");
+                await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).DuelDeckWithIncorretFormat());
                 return false;
             }
         }
-        */
+
+        public static async Task<bool> IsNotDueling(CommandContext ctx, DiscordUser user)
+        {
+            if (MyConditions.IsNotDueling(user)) return true;
+            else
+            {
+                await ctx.Channel.SendMessageAsync(MyUtilities.GetMessager(ctx).CantUseActionWhileDueling());
+                return false;
+            }
+        }
     }
 }
