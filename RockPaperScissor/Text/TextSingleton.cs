@@ -12,7 +12,7 @@ namespace RockPaperScissor.Text
     {
         public static List<TextMessagesGerenciator> GerenciatorList = new List<TextMessagesGerenciator>()
         {
-            new EnglishTextGerenciator(), new PortugueseTextGerenciator()
+            new EnglishTextGerenciator(), new PortugueseTextGerenciator(), new SpanishTextGerenciator()
         };
 
 
