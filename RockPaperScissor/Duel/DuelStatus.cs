@@ -28,6 +28,7 @@ namespace RockPaperScissor.Duel
         private int defenseCardIndex;
         private int attackElement;
         private int defenseElement;
+        private Award._ElementalAward[] combatentAwards;
 
 
         //win regulation

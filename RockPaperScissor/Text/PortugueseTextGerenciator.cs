@@ -308,5 +308,20 @@ namespace RockPaperScissor.Text
         {
             return "Você não pode deleter o seu deck antes de ser capaz de pegar uma nova carta";
         }
+
+        public override string PrecisionAwardMessage()
+        {
+            return "Prêmio Elemental da Precisão: Compre uma carta a mais!";
+        }
+
+        public override string ImpactAwardMessage()
+        {
+            return "Premio Elemental do Impacto: Receba um poderoso bônus bruto!";
+        }
+
+        public override string EnchantAwardMessage()
+        {
+            return "Premio Elemental do Encanto: Bloqueie uma carta do oponente!";
+        }
     }
 }

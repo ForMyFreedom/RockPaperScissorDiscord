@@ -68,5 +68,8 @@ namespace RockPaperScissor.Text
         public abstract String TheDefenseWin();
         public abstract String WinnerGetCoinsLoserMissCoins();
         public abstract String CantResetAfterEarlyClaim();
+        public abstract String PrecisionAwardMessage();
+        public abstract String ImpactAwardMessage();
+        public abstract String EnchantAwardMessage();
     }
 }

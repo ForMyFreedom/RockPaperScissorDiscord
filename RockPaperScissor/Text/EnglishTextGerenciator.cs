@@ -307,5 +307,20 @@ namespace RockPaperScissor.Text
         {
             return "You can't delete your deck before be able to claim a new card";
         }
+
+        public override string PrecisionAwardMessage()
+        {
+            return "Precision's Elemental Award: Draw an extra card!";
+        }
+
+        public override string ImpactAwardMessage()
+        {
+            return "Impact's Elemental Award: Receive a mighty raw bonus!";
+        }
+
+        public override string EnchantAwardMessage()
+        {
+            return "Enchant's Elemental Award: Block an opponent card!";
+        }
     }
 }
