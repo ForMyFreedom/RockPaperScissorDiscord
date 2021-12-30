@@ -7,8 +7,8 @@ _Discord Bot_ made in C# that transform the classic old game in an __Epic TCG!__
 
 ## CURRENT TO DO LIST
 - [x] Implement the Bases of Duel
+- [ ] Implement the Elemental Award
 - [ ] Implement the Duel Variations of Game and WinLoseConditions
-- [ ] Create the another three focus alocation
 - [ ] There is no logic in element when the card does not correspond to the chosen element. Advantage need to be re-write
 - [ ] Solve problems with private and server assumptions (There is no conection of an player and a server)
 
@@ -44,7 +44,7 @@ _Duels_ consists of a strategic combat of cards seeking for more Points of Victo
 The Deck of a Card Master contains the following data:
   * The Cards you have (The Limit of cards you can possess is 30 cards)
   * The amount of Money (You start the game with 50 ℳ ).
-  * Two Blank Duel Decks that referes the Cards you what to use in a Duel
+  * Two Blank Duel Decks that referes the Cards you want to use in a Duel
 
 ---
 
@@ -71,29 +71,23 @@ Paper|0|0|1
 
 ## Claiming Cards
 After a certain amount of time (Currently 30 minutes), ever Card Master has the right to claim a new card to the system.
-Having 33.3% percent of chance to gain the claimed card.
+Having 50% percent of chance to gain the claimed card.
 
 If you succeed in claimed the card, you can choose what focus you wanted it's to have: Impact, Precision or Enchant
+
 Note that the card you will get not necessarily will follows the focus you choosed. That is a random TCG!
+
 And finally, ever card you get that way will come with a Star value that represents its general power
 
 ### Star and EP
 1d100|Stars|EP|Percent to get *
 :---: | :---: | :---: | :---: 
-1-50|★|3|16.66%
-51-75|★★|5|8.33%
-76-90|★★★|7|5%
-91-98|★★★★|9|2.66%
-99-100|★★★★★|11|0.66%
+1-50|★|3|25%
+51-75|★★|5|12.5%
+76-90|★★★|7|7.5%
+91-98|★★★★|9|4%
+99-100|★★★★★|11|1%
 \* Considering the claim chance
-
-### Focus Allocation
-1d4|Type of Focus|Description
-:---: | :---: | :---:
-1|Mitigated Focus|Distribute equally the EP into the Elements
-2|Regulated Focus|Allocate half of the EP into the two Elements besides focus and then put the rest in the Focus
-3|Random Focus|Allocate the EP randomly
-4|Reforced Focus|Put all the EP in the Focus of the Card
 
 ---
 
