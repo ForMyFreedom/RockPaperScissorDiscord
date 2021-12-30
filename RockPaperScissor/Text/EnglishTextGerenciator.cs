@@ -60,7 +60,7 @@ namespace RockPaperScissor.Text
 
         public override string DealMessageTemplate()
         {
-            return "& proposes the deal: \n & \n For & that he has";
+            return "& proposes the deal: \n & \n For & that it has";
         }
 
         public override string DealDeclined()
@@ -100,7 +100,7 @@ namespace RockPaperScissor.Text
 
         public override string LostCardByError()
         {
-            return "You commited an error and for this you lost your card";
+            return "You committed an error and for this you lost your card";
         }
 
         public override string ExplaningPremiation()
@@ -270,7 +270,7 @@ namespace RockPaperScissor.Text
 
         public override string ChooseAttackElement()
         {
-            return "Still on the Attacker, choose an element ('imp','pre','enc','pod') to be your Attack Element";
+            return "Attacker, choose an element ('imp','pre','enc','pod') to be your Attack Element";
         }
 
         public override string QuantOfCards()//@

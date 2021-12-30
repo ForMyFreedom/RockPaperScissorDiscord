@@ -266,12 +266,12 @@ namespace RockPaperScissor.Text
 
         public override string ChooseDefenseElement()
         {
-            return "Ainda no Defensor, escolha um elemento ('imp','pre','enc','pod') para ser seu Elemento de Defesa";
+            return "Defensor, escolha um elemento ('imp','pre','enc','pod') para ser seu Elemento de Defesa";
         }
 
         public override string ChooseAttackElement()
         {
-            return "Ainda no Atacante, escolha um elemento ('imp','pre','enc','pod') para ser seu Elemento de Ataque";
+            return "Atacante, escolha um elemento ('imp','pre','enc','pod') para ser seu Elemento de Ataque";
         }
 
         public override string QuantOfCards()
